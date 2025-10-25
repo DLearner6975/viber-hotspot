@@ -1,37 +1,44 @@
-using System;
 using Application.Activities.DTO;
 using Application.Core;
+
 using AutoMapper;
-using Domain;
+
 using MediatR;
+
 using Persistence;
 
-namespace Application.Activities.Commands;
-
-public class EditActivity
+namespace Application.Activities.Commands
 {
-    public class Command : IRequest<Result<Unit>>
+    public class EditActivity
     {
-        public required EditActivityDto ActivityDto { get; set; }
-    }
-
-
-    public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, Result<Unit>>
-    {
-        public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+        public class Command : IRequest<Result<Unit>>
         {
-            var activity = await context.Activities
-                .FindAsync([request.ActivityDto.Id], cancellationToken);
+            public required EditActivityDto ActivityDto
+            {
+                get; set;
+            }
+        }
 
-            if (activity == null) return Result<Unit>.Failure("Activity not found", 404);
 
-            mapper.Map(request.ActivityDto, activity);
+        public class Handler(AppDbContext context, IMapper mapper) : IRequestHandler<Command, Result<Unit>>
+        {
+            public async Task<Result<Unit>> Handle(Command request, CancellationToken cancellationToken)
+            {
+                var activity = await context.Activities
+                    .FindAsync([request.ActivityDto.Id], cancellationToken);
 
-            var result = await context.SaveChangesAsync(cancellationToken) > 0;
+                if (activity == null)
+                    return Result<Unit>.Failure("Activity not found", 404);
 
-            if (!result) return Result<Unit>.Failure("Failed to update activity", 400);
+                mapper.Map(request.ActivityDto, activity);
 
-            return Result<Unit>.Success(Unit.Value);
+                var result = await context.SaveChangesAsync(cancellationToken) > 0;
+
+                if (!result)
+                    return Result<Unit>.Failure("Failed to update activity", 400);
+
+                return Result<Unit>.Success(Unit.Value);
+            }
         }
     }
 }

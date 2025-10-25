@@ -1,10 +1,22 @@
 using System;
 
-namespace Application.Profiles.DTOs
+namespace Application.Activities.DTOs
 {
-    public class UserProfile
+    public class CommentDto
     {
         public required string Id
+        {
+            get; set;
+        }
+        public required string Body
+        {
+            get; set;
+        }
+        public DateTime CreatedAt
+        {
+            get; set;
+        }
+        public required string UserId
         {
             get; set;
         }
@@ -12,23 +24,7 @@ namespace Application.Profiles.DTOs
         {
             get; set;
         }
-        public string? Bio
-        {
-            get; set;
-        }
         public string? ImageUrl
-        {
-            get; set;
-        }
-        public bool Following
-        {
-            get; set;
-        }
-        public int FollowersCount
-        {
-            get; set;
-        }
-        public int FollowingCount
         {
             get; set;
         }

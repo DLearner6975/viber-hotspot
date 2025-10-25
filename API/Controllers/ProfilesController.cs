@@ -1,7 +1,9 @@
-using Application.Profiles.Command;
+using Application.Profiles.Commands;
 using Application.Profiles.DTOs;
 using Application.Profiles.Queries;
+
 using Domain;
+
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 

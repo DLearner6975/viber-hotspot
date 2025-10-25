@@ -1,11 +1,13 @@
 using System;
+
 using Domain;
 
-namespace Application.Interfaces;
-
-public interface IUserAccessor
+namespace Application.Interfaces
 {
-    string GetUserId();
-    Task<User> GetUserAsync();
-    Task<User> GetUserWithPhotoAsync();
+    public interface IUserAccessor
+    {
+        string GetUserId();
+        Task<User> GetUserAsync();
+        Task<User> GetUserWithPhotoAsync();
+    }
 }

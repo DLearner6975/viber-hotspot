@@ -1,9 +1,13 @@
 using Application.Activities.Commands;
 using Application.Activities.DTO;
+using Application.Activities.DTOs;
 using Application.Activities.Queries;
 using Application.Core;
+
 using Domain;
+
 using MediatR;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.CodeAnalysis.Differencing;

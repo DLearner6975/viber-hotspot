@@ -24,25 +24,92 @@ charset = utf-8
 
 
 [*.cs]
-# --- C# Formatting (Spacing and New Lines) ---
+# # --- C# Formatting (Spacing and New Lines) ---
 
-# Bracing Style (Allman for methods/blocks, K&R for objects/initializers)
-# Puts { on a new line for types, methods, properties, and control flow blocks (if/while/for/etc.)
-# csharp_new_line_before_open_brace = methods, properties, control_blocks, types
+# # Bracing Style (Allman for methods/blocks, K&R for objects/initializers)
+# # Puts { on a new line for types, methods, properties, and control flow blocks (if/while/for/etc.)
+# # csharp_new_line_before_open_brace = methods, properties, control_blocks, types
 
-# Newline control for block keywords
+# # Newline control for block keywords
+# csharp_new_line_before_else = true
+# csharp_new_line_before_catch = true
+# csharp_new_line_before_finally = true
+# csharp_new_line_before_open_brace.accessors = new_line # Property accessors (get/set)
+
+# # Indentation
+# csharp_indent_case_contents = true
+# csharp_indent_switch_labels = true
+
+# # Spacing
+# csharp_space_after_cast = false
+# csharp_space_after_keywords_in_control_flow_statements = true
+# csharp_space_around_binary_operators = before_and_after
+# csharp_space_between_method_call_name_and_opening_parenthesis = false
+# csharp_space_between_method_declaration_name_and_opening_parenthesis = false
+
+# Applies to all C# files
+[*.cs]
+
+#### Indentation & Spacing ####
+indent_style = space
+indent_size = 4
+tab_width = 4
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+#### New Lines & Braces ####
+csharp_new_line_before_open_brace = all
 csharp_new_line_before_else = true
 csharp_new_line_before_catch = true
 csharp_new_line_before_finally = true
-csharp_new_line_before_open_brace.accessors = new_line # Property accessors (get/set)
+csharp_new_line_before_members_in_object_initializers = true
+csharp_new_line_before_members_in_anonymous_types = true
+csharp_new_line_between_query_expression_clauses = true
 
-# Indentation
-csharp_indent_case_contents = true
-csharp_indent_switch_labels = true
-
-# Spacing
+#### Spacing ####
 csharp_space_after_cast = false
 csharp_space_after_keywords_in_control_flow_statements = true
+csharp_space_between_method_declaration_parameter_list_parentheses = false
+csharp_space_between_method_call_parameter_list_parentheses = false
+csharp_space_before_open_square_brackets = false
+csharp_space_between_square_brackets = false
+csharp_space_before_comma = false
+csharp_space_after_comma = true
+csharp_space_before_dot = false
+csharp_space_after_dot = false
 csharp_space_around_binary_operators = before_and_after
-csharp_space_between_method_call_name_and_opening_parenthesis = false
-csharp_space_between_method_declaration_name_and_opening_parenthesis = false
+csharp_space_after_semicolon_in_for_statement = true
+csharp_space_before_colon_in_inheritance_clause = true
+csharp_space_after_colon_in_inheritance_clause = true
+
+#### Wrapping & Line Breaks ####
+csharp_preserve_single_line_blocks = false
+csharp_preserve_single_line_statements = false
+
+#### Using Directives ####
+dotnet_sort_system_directives_first = true
+dotnet_separate_import_directive_groups = true
+
+#### Naming & Style Preferences ####
+dotnet_style_qualification_for_field = false:suggestion
+dotnet_style_qualification_for_property = false:suggestion
+dotnet_style_qualification_for_method = false:suggestion
+dotnet_style_qualification_for_event = false:suggestion
+
+dotnet_style_require_accessibility_modifiers = for_non_interface_members:suggestion
+
+#### Expression Styles ####
+csharp_style_expression_bodied_methods = when_on_single_line:suggestion
+csharp_style_expression_bodied_properties = when_on_single_line:suggestion
+csharp_style_expression_bodied_indexers = when_on_single_line:suggestion
+csharp_style_expression_bodied_accessors = when_on_single_line:suggestion
+
+#### Var Usage ####
+csharp_style_var_for_built_in_types = false:suggestion
+csharp_style_var_when_type_is_apparent = false:suggestion
+csharp_style_var_elsewhere = false:suggestion
+
+#### This & Object Initializers ####
+dotnet_style_object_initializer = true:suggestion
+dotnet_style_collection_initializer = true:suggestion
+dotnet_style_explicit_tuple_names = true:suggestion

@@ -12,6 +12,9 @@
     "dependencies": {
         "@emotion/react": "^11.14.0",
         "@emotion/styled": "^11.14.1",
+        "@fontsource-variable/nunito": "^5.2.7",
+        "@fontsource-variable/nunito-sans": "^5.2.7",
+        "@fontsource/poppins": "^5.2.7",
         "@fontsource/roboto": "^5.2.8",
         "@hookform/resolvers": "^5.2.2",
         "@microsoft/signalr": "^9.0.6",

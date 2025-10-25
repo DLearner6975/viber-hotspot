@@ -1,14 +1,17 @@
 using System;
+
 using Application.Activities.Commands;
-using Application.Activities.DTO;
+using Application.Activities.DTOs;
+
 using FluentValidation;
 
-namespace Application.Activities.Validators;
-
-public class CreateActivityValidators : BaseActivityValidator<CreateActivity.Command, CreateActivityDto>
+namespace Application.Activities.Validators
 {
-    public CreateActivityValidators() : base(x => x.ActivityDto)
+    public class CreateActivityValidators : BaseActivityValidator<CreateActivity.Command, CreateActivityDto>
     {
-    }
+        public CreateActivityValidators() : base(x => x.ActivityDto)
+        {
+        }
 
+    }
 }
