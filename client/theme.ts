@@ -1,55 +1,45 @@
 // src/theme/theme.ts
 import { createTheme } from "@mui/material/styles";
 
-// Extend MUI palette interface to include our custom color sets
+// Allow numeric shade access on palette colors (e.g., primary[900])
 declare module "@mui/material/styles" {
-    interface Palette {
-        main: Palette["primary"];
-        warning: Palette["primary"];
-        error: Palette["primary"];
-        success: Palette["primary"];
-        info: Palette["primary"];
-        secondary: Palette["primary"];
-        grey: Palette["primary"];
+    interface PaletteColor {
+        50?: string;
+        100?: string;
+        200?: string;
+        300?: string;
+        400?: string;
+        500?: string;
+        600?: string;
+        700?: string;
+        800?: string;
+        900?: string;
+        A100?: string;
+        A200?: string;
+        A400?: string;
+        A700?: string;
     }
-    interface PaletteOptions {
-        main?: PaletteOptions["primary"];
-        warning?: PaletteOptions["primary"];
-        error?: PaletteOptions["primary"];
-        success?: PaletteOptions["primary"];
-        info?: PaletteOptions["primary"];
-        secondary?: PaletteOptions["primary"];
-        grey?: PaletteOptions["primary"];
-    }
-}
-
-// Extend component color props (so Button, Chip, etc. support them)
-declare module "@mui/material/Button" {
-    interface ButtonPropsColorOverrides {
-        main: true;
-        warning: true;
-        error: true;
-        success: true;
-        info: true;
-        secondary: true;
-        grey: true;
-    }
-}
-declare module "@mui/material/Chip" {
-    interface ChipPropsColorOverrides {
-        main: true;
-        warning: true;
-        error: true;
-        success: true;
-        info: true;
-        secondary: true;
-        grey: true;
+    interface SimplePaletteColorOptions {
+        50?: string;
+        100?: string;
+        200?: string;
+        300?: string;
+        400?: string;
+        500?: string;
+        600?: string;
+        700?: string;
+        800?: string;
+        900?: string;
+        A100?: string;
+        A200?: string;
+        A400?: string;
+        A700?: string;
     }
 }
 
 export const theme = createTheme({
     palette: {
-        main: {
+        primary: {
             50: "#fdedef",
             100: "#fbdee2",
             200: "#f7bdc5",
@@ -144,8 +134,6 @@ export const theme = createTheme({
             700: "#5a494f",
             800: "#3e3236",
             900: "#231b1e",
-            main: "#977d86",
-            contrastText: "#fff",
         },
     },
     typography: {

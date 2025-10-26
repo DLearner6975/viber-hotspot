@@ -6,26 +6,56 @@ import {
     Container,
     MenuItem,
     CircularProgress,
+    IconButton,
+    Menu,
+    ListItemIcon,
+    ListItemText,
+    Divider,
+    Avatar,
+    useMediaQuery,
 } from "@mui/material";
 import { Group } from "@mui/icons-material";
+import MenuIcon from "@mui/icons-material/Menu";
+import { useTheme } from "@mui/material/styles";
 import { NavLink } from "react-router";
 import MenuItemLink from "../shared/components/MenuItemLink";
 import { useStore } from "../../lib/hooks/useStore";
 import { Observer } from "mobx-react-lite";
 import { useAccount } from "../../lib/hooks/useAccount";
+import { useEffect, useState } from "react";
 import UserMenu from "./UserMenu";
 
 export default function NavBar() {
     const { uiStore } = useStore();
-    const { currentUser } = useAccount();
+    const { currentUser, logoutUser } = useAccount();
+    const [mobileMenuAnchor, setMobileMenuAnchor] =
+        useState<null | HTMLElement>(null);
+    const theme = useTheme();
+    const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
+
+    useEffect(() => {
+        if (isMdUp && mobileMenuAnchor) {
+            setMobileMenuAnchor(null);
+        }
+    }, [isMdUp, mobileMenuAnchor]);
+
+    const handleOpenMobileMenu = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        setMobileMenuAnchor(event.currentTarget);
+    };
+
+    const handleCloseMobileMenu = () => {
+        setMobileMenuAnchor(null);
+    };
 
     return (
         <Box sx={{ flexGrow: 1 }}>
             <AppBar
                 position="fixed"
                 sx={{
-                    backgroundImage:
-                        "linear-gradient(135deg, #182a73 0%, #218aae 69%, #20a7ac 89% )",
+                    backgroundImage: (theme) =>
+                        `linear-gradient(135deg, ${theme.palette.primary[900]} 0%, ${theme.palette.primary[600]} 69%, ${theme.palette.primary.main} 89%)`,
                 }}
             >
                 <Container maxWidth="xl">
@@ -67,14 +97,18 @@ export default function NavBar() {
                                 </Observer>
                             </MenuItem>
                         </Box>
-                        <Box sx={{ display: "flex" }}>
+                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
                             <MenuItemLink to="/activities">
                                 Activities
                             </MenuItemLink>
                             <MenuItemLink to="/counter">Counter</MenuItemLink>
                             <MenuItemLink to="/errors">Errors</MenuItemLink>
                         </Box>
-                        <Box display="flex" alignItems="center">
+                        <Box
+                            display="flex"
+                            alignItems="center"
+                            sx={{ display: { xs: "none", md: "flex" } }}
+                        >
                             {currentUser ? (
                                 <UserMenu />
                             ) : (
@@ -88,8 +122,106 @@ export default function NavBar() {
                                 </>
                             )}
                         </Box>
+                        <IconButton
+                            color="inherit"
+                            onClick={handleOpenMobileMenu}
+                            sx={{ display: { xs: "flex", md: "none" } }}
+                            aria-label="open navigation menu"
+                        >
+                            <MenuIcon />
+                        </IconButton>
                     </Toolbar>
                 </Container>
+                <Menu
+                    anchorEl={mobileMenuAnchor}
+                    open={Boolean(mobileMenuAnchor)}
+                    onClose={handleCloseMobileMenu}
+                    slotProps={{
+                        paper: { sx: { width: 260 } },
+                        list: { "aria-labelledby": "mobile-nav-button" },
+                    }}
+                >
+                    {currentUser && (
+                        <MenuItem
+                            disabled
+                            sx={{ opacity: 1, cursor: "default" }}
+                        >
+                            <ListItemIcon>
+                                <Avatar
+                                    src={currentUser.imageUrl}
+                                    alt="current user image"
+                                />
+                            </ListItemIcon>
+                            <ListItemText primary={currentUser.displayName} />
+                        </MenuItem>
+                    )}
+                    {currentUser && <Divider />}
+                    <MenuItem
+                        component={NavLink}
+                        to="/activities"
+                        onClick={handleCloseMobileMenu}
+                    >
+                        <ListItemText>Activities</ListItemText>
+                    </MenuItem>
+                    <MenuItem
+                        component={NavLink}
+                        to="/counter"
+                        onClick={handleCloseMobileMenu}
+                    >
+                        <ListItemText>Counter</ListItemText>
+                    </MenuItem>
+                    <MenuItem
+                        component={NavLink}
+                        to="/errors"
+                        onClick={handleCloseMobileMenu}
+                    >
+                        <ListItemText>Errors</ListItemText>
+                    </MenuItem>
+                    <Divider />
+                    {currentUser ? (
+                        <>
+                            <MenuItem
+                                component={NavLink}
+                                to="/createActivity"
+                                onClick={handleCloseMobileMenu}
+                            >
+                                <ListItemText>Create Activity</ListItemText>
+                            </MenuItem>
+                            <MenuItem
+                                component={NavLink}
+                                to={`/profiles/${currentUser.id}`}
+                                onClick={handleCloseMobileMenu}
+                            >
+                                <ListItemText>My Profile</ListItemText>
+                            </MenuItem>
+                            <MenuItem
+                                onClick={() => {
+                                    logoutUser.mutate();
+                                    handleCloseMobileMenu();
+                                }}
+                            >
+                                <ListItemText>Logout</ListItemText>
+                            </MenuItem>
+                        </>
+                    ) : (
+                        <>
+                            <MenuItem
+                                component={NavLink}
+                                to="/login"
+                                onClick={handleCloseMobileMenu}
+                            >
+                                <ListItemText>Login</ListItemText>
+                            </MenuItem>
+                            <MenuItem
+                                component={NavLink}
+                                to="/register"
+                                onClick={handleCloseMobileMenu}
+                            >
+                                <ListItemText>Register</ListItemText>
+                            </MenuItem>
+                        </>
+                    )}
+                </Menu>
             </AppBar>
         </Box>
     );

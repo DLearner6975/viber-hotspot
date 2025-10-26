@@ -37,9 +37,39 @@ export default function ProfileActivities() {
         <Box>
             <Grid container spacing={2}>
                 <Grid size={12}>
-                    <Tabs value={activeTab} onChange={handleTabChange}>
+                    <Tabs
+                        value={activeTab}
+                        onChange={handleTabChange}
+                        textColor="inherit"
+                        slotProps={{ indicator: { sx: { display: "none" } } }}
+                        // indicatorColor="primary"
+                    >
                         {tabs.map((tab, index) => (
-                            <Tab label={tab.menuItem} key={index} />
+                            <Tab
+                                label={tab.menuItem}
+                                key={index}
+                                sx={{
+                                    minHeight: 32,
+                                    minWidth: 120,
+                                    padding: "8px 20px",
+                                    borderRadius: "20px", // Pill shape for individual tabs
+                                    textTransform: "none", // Keep text non-uppercase
+                                    fontWeight: 600,
+                                    color: "#495057", // Default text color
+
+                                    // Add a smooth transition to the background color
+                                    transition:
+                                        "background-color 0.3s, color 0.3s",
+
+                                    // Styles when the tab is selected
+                                    "&.Mui-selected": {
+                                        bgcolor: "primary.700", // Your desired accent color (Cyan in this example)
+                                        color: "#fff",
+                                        boxShadow:
+                                            "0 4px 20px 0 rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(0, 188, 212, 0.4)",
+                                    },
+                                }}
+                            />
                         ))}
                     </Tabs>
                 </Grid>
