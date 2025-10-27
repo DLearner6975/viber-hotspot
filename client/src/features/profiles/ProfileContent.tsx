@@ -1,53 +1,134 @@
-import { Paper, Tab, Tabs } from "@mui/material";
+import { Paper, Stack, styled, Tab, Tabs, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import { useState, type SyntheticEvent } from "react";
+import { useState, type ReactNode } from "react";
 import ProfilePhotos from "./ProfilePhotos";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
 import ProfileActivities from "./ProfileActivities";
+import {
+    PersonOutlined,
+    MonochromePhotosOutlined,
+    GroupsOutlined,
+    EventOutlined,
+    InfoOutlined,
+} from "@mui/icons-material";
 
 export default function ProfileContent() {
     const [value, setValue] = useState(0);
 
-    const handleChange = (_: SyntheticEvent, newValue: number) => {
-        setValue(newValue);
-    };
-    const tabContent = [
-        { label: "About", content: <ProfileAbout /> },
-        { label: "Photos", content: <ProfilePhotos /> },
-        { label: "Events", content: <ProfileActivities /> },
+    const tabData = [
+        {
+            label: "About",
+            content: <ProfileAbout />,
+            icon: <InfoOutlined />,
+        },
+        {
+            label: "Photos",
+            content: <ProfilePhotos />,
+            icon: <MonochromePhotosOutlined />,
+        },
+        {
+            label: "Events",
+            content: <ProfileActivities />,
+            icon: <EventOutlined />,
+        },
         {
             label: "Followers",
             content: <ProfileFollowings activeTab={value} />,
+            icon: <PersonOutlined />,
         },
         {
             label: "Following",
             content: <ProfileFollowings activeTab={value} />,
+            icon: <GroupsOutlined />,
         },
     ];
 
     return (
-        <Box
-            component={Paper}
-            mt={2}
-            p={3}
-            elevation={3}
-            height={500}
-            sx={{ display: "flex", alignItems: "flex-start", borderRadius: 3 }}
-        >
+        <Stack direction="row" gap={2} mt={2}>
             <Tabs
                 orientation="vertical"
+                slotProps={{ indicator: { sx: { display: "none" } } }}
                 value={value}
-                onChange={handleChange}
-                sx={{ borderRight: 1, height: 450, minWidth: 200 }}
+                onChange={(_event, newValue) => setValue(newValue)}
+                sx={{
+                    "& .MuiTabs-flexContainer": {
+                        gap: 1,
+                    },
+                }}
             >
-                {tabContent.map((tab, index) => (
-                    <Tab key={index} label={tab.label} sx={{ mr: 3 }} />
+                {tabData.map((tab, index) => (
+                    <StyledTab
+                        key={index}
+                        label={
+                            <Stack
+                                direction="row"
+                                alignItems="center"
+                                gap={0.5}
+                            >
+                                {tab.icon}
+                                <Box>
+                                    <Typography whiteSpace="nowrap">
+                                        {tab.label}
+                                    </Typography>
+                                </Box>
+                            </Stack>
+                        }
+                    />
                 ))}
             </Tabs>
-            <Box sx={{ flexGrow: 1, p: 3, pt: 0 }}>
-                {tabContent[value].content}
-            </Box>
-        </Box>
+            {tabData.map((tab, index) => (
+                <TabPanel key={index} value={value} index={index}>
+                    {tab.content}
+                </TabPanel>
+            ))}
+        </Stack>
     );
 }
+
+const StyledTab = styled(Tab)(({ theme }) => ({
+    alignItems: "flex-start",
+    border: "1px solid",
+    borderColor: theme.palette.grey[200],
+    textTransform: "none",
+    backgroundColor: theme.palette.grey[50],
+    borderRadius: "12px",
+    padding: "24px",
+    transition: "all 0.2s ease-in-out",
+    "& p": {
+        color: theme.palette.grey[500],
+    },
+    "& svg": {
+        fontSize: 30,
+        color: theme.palette.grey[400],
+    },
+    "&.Mui-selected, &:hover": {
+        backgroundColor: "#fff",
+        boxShadow: theme.shadows[3],
+        "& p": {
+            color: theme.palette.primary.main,
+        },
+        "& svg": {
+            color: theme.palette.primary[400],
+        },
+    },
+}));
+
+type TabPanelProps = {
+    children: ReactNode;
+    value: number;
+    index: number;
+};
+
+const TabPanel = ({ children, value, index }: TabPanelProps) => {
+    return (
+        value === index && (
+            <Paper
+                elevation={3}
+                sx={{ p: 3, width: "100%", borderRadius: "12px" }}
+            >
+                {children}
+            </Paper>
+        )
+    );
+};
