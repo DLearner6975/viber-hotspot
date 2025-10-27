@@ -1,6 +1,7 @@
 import { Paper, Stack, styled, Tab, Tabs, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import { useState, type ReactNode } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import ProfilePhotos from "./ProfilePhotos";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
@@ -122,13 +123,29 @@ type TabPanelProps = {
 
 const TabPanel = ({ children, value, index }: TabPanelProps) => {
     return (
-        value === index && (
-            <Paper
-                elevation={3}
-                sx={{ p: 3, width: "100%", borderRadius: "12px" }}
-            >
-                {children}
-            </Paper>
-        )
+        <AnimatePresence mode="popLayout">
+            {value === index && (
+                <motion.div
+                    key={index}
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    style={{ width: "100%", overflow: "hidden" }}
+                >
+                    <Paper
+                        elevation={3}
+                        sx={{
+                            p: 3,
+                            width: "100%",
+                            height: "434px",
+                            borderRadius: "12px",
+                        }}
+                    >
+                        {children},
+                    </Paper>
+                </motion.div>
+            )}
+        </AnimatePresence>
     );
 };

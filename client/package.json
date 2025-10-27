@@ -25,6 +25,7 @@
         "@tanstack/react-query-devtools": "^5.90.2",
         "axios": "^1.12.2",
         "date-fns": "^4.1.0",
+        "framer-motion": "^12.23.24",
         "leaflet": "^1.9.4",
         "mobx": "^6.15.0",
         "mobx-react-lite": "^4.1.1",
