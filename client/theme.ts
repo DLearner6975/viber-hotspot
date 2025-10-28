@@ -99,6 +99,7 @@ export const theme = createTheme({
             900: "#231b1e",
         },
     },
+    cssVariables: true,
     typography: {
         fontFamily: `"Nunito Variable", 'Roboto', 'Helvetica', 'Arial', sans-serif`,
         h1: { fontWeight: 800 },
