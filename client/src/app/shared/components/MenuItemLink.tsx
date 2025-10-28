@@ -17,7 +17,7 @@ export default function MenuItemLink({
                 fontSize: "1.2rem",
                 textTransform: "uppercase",
                 fontWeight: "bold",
-                "&.active": { color: "yellow" },
+                "&.active": { color: "secondary.main" },
             }}
         >
             {children}
