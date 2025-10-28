@@ -1,41 +1,4 @@
-// src/theme/theme.ts
 import { createTheme } from "@mui/material/styles";
-
-// Allow numeric shade access on palette colors (e.g., primary[900])
-declare module "@mui/material/styles" {
-    interface PaletteColor {
-        50?: string;
-        100?: string;
-        200?: string;
-        300?: string;
-        400?: string;
-        500?: string;
-        600?: string;
-        700?: string;
-        800?: string;
-        900?: string;
-        A100?: string;
-        A200?: string;
-        A400?: string;
-        A700?: string;
-    }
-    interface SimplePaletteColorOptions {
-        50?: string;
-        100?: string;
-        200?: string;
-        300?: string;
-        400?: string;
-        500?: string;
-        600?: string;
-        700?: string;
-        800?: string;
-        900?: string;
-        A100?: string;
-        A200?: string;
-        A400?: string;
-        A700?: string;
-    }
-}
 
 export const theme = createTheme({
     palette: {
@@ -64,7 +27,7 @@ export const theme = createTheme({
             700: "#773f17",
             800: "#532a0d",
             900: "#311705",
-            main: "#ef8539",
+            main: "##c56d2d",
             contrastText: "#fff",
         },
         error: {
@@ -92,7 +55,7 @@ export const theme = createTheme({
             700: "#0e550e",
             800: "#073c07",
             900: "#022102",
-            main: "#39ef39",
+            main: "#1e8f1e",
             contrastText: "#000",
         },
         info: {
@@ -110,17 +73,17 @@ export const theme = createTheme({
             contrastText: "#fff",
         },
         secondary: {
-            50: "#d4ffff",
-            100: "#85fefe",
-            200: "#39efef",
-            300: "#30cfcf",
-            400: "#27afaf",
-            500: "#1e8f8f",
-            600: "#167171",
-            700: "#0e5454",
-            800: "#073b3b",
-            900: "#022222",
-            main: "#39efef",
+            50: "#F4F2FE",
+            100: "#E9E6FD",
+            200: "#D0C9FC",
+            300: "#BBAFFA",
+            400: "#A696F8",
+            500: "#9078F6",
+            600: "#7D5BF4",
+            700: "#6A38F0",
+            800: "#4918B6",
+            900: "#28096C",
+            main: "#9078F6",
             contrastText: "#000",
         },
         grey: {
