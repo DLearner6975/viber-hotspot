@@ -27,7 +27,7 @@ export const theme = createTheme({
             700: "#773f17",
             800: "#532a0d",
             900: "#311705",
-            main: "##c56d2d",
+            main: "#c56d2d",
             contrastText: "#fff",
         },
         error: {

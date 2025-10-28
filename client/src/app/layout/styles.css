@@ -6,7 +6,8 @@
 
 .react-calendar__tile--active,
 .react-calendar__tile--now,
-.react-calendar__tile:enabled:hover {
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile--active:hover {
     color: white !important;
     border-radius: 8px;
     transition: background-color 0.3s ease;
@@ -22,12 +23,13 @@
 }
 
 .react-calendar__tile:enabled:hover {
-    background-color: var(--mui-palette-grey-200) !important;
+    background-color: var(--mui-palette-grey-300) !important;
 }
 
-.react-calendar__tile--active:hover {
+/* TODO: look more into hoover effect */
+/* .react-calendar__tile--active:hover {
     background-color: var(--mui-palette-primary-600) !important;
-}
+} */
 
 .react-calendar__month-view__days__day--weekend {
     color: var(--mui-palette-primary-main) !important;
