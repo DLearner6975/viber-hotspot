@@ -83,13 +83,16 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                         {formatDate(date)}
                     </Typography>
                     <Typography variant="subtitle2">
-                        Hosted by{" "}
-                        <Link
+                        Hosted by
+                        <Typography
+                            component={Link}
                             to={`/profiles/${hostId}`}
-                            style={{ color: "white", fontWeight: "bold" }}
+                            color="secondary"
+                            fontWeight="bold"
+                            ml={0.5}
                         >
                             {hostDisplayName}
-                        </Link>
+                        </Typography>
                     </Typography>
                 </Box>
 

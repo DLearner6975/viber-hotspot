@@ -1,8 +1,15 @@
 import { useForm } from "react-hook-form";
 import { useAccount } from "../../lib/hooks/useAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Box, Button, Paper, Typography } from "@mui/material";
-import { LockOpen } from "@mui/icons-material";
+import {
+    Box,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    Container,
+    Typography,
+} from "@mui/material";
 import TextInput from "../../app/shared/components/TextInput";
 import { Link } from "react-router";
 import {
@@ -43,61 +50,84 @@ export default function RegisterForm() {
     };
 
     return (
-        <Paper
-            component="form"
-            onSubmit={handleSubmit(onSubmit)}
-            sx={{
-                display: "flex",
-                flexDirection: "column",
-                gap: 3,
-                p: 3,
-                maxWidth: "md",
-                mx: "auto",
-                borderRadius: 3,
-            }}
-        >
-            <Box
-                display="flex"
-                alignItems="center"
-                justifyContent="center"
-                gap={3}
-                color="secondary.main"
-            >
-                <LockOpen fontSize="large" />
-                <Typography variant="h4">Register</Typography>
+        <Container maxWidth="sm">
+            <Box sx={{ mt: 6 }}>
+                <Card sx={{ overflow: "visible", position: "relative" }}>
+                    <CardHeader
+                        sx={{
+                            bgcolor: "primary.main",
+                            color: "white",
+                            borderRadius: 1,
+                            boxShadow: 3,
+                            position: "absolute",
+                            left: 16,
+                            right: 16,
+                            transform: "translateY(-50%)",
+                            p: 6,
+                        }}
+                        title="Register"
+                        slotProps={{
+                            title: {
+                                variant: "h5",
+                                fontWeight: 300,
+                                textAlign: "center",
+                            },
+                        }}
+                    />
+                    <CardContent sx={{ pt: 10 }}>
+                        <Box
+                            component="form"
+                            onSubmit={handleSubmit(onSubmit)}
+                            sx={{
+                                display: "flex",
+                                flexDirection: "column",
+                                gap: 3,
+                                p: 3,
+                                maxWidth: "md",
+                                mx: "auto",
+                                borderRadius: 3,
+                            }}
+                        >
+                            <TextInput
+                                label="Email"
+                                control={control}
+                                name="email"
+                            />
+                            <TextInput
+                                label="Display Name"
+                                control={control}
+                                name="displayName"
+                            />
+                            <TextInput
+                                label="Password"
+                                control={control}
+                                type="password"
+                                name="password"
+                            />
+                            <Button
+                                type="submit"
+                                variant="contained"
+                                size="large"
+                                color="primary"
+                                disabled={!isValid || isSubmitting}
+                            >
+                                Register
+                            </Button>
+                            <Typography sx={{ textAlign: "center" }}>
+                                Already have an account?
+                                <Typography
+                                    component={Link}
+                                    to="/login"
+                                    color="secondary"
+                                    sx={{ ml: 2 }}
+                                >
+                                    Sign in
+                                </Typography>
+                            </Typography>
+                        </Box>
+                    </CardContent>
+                </Card>
             </Box>
-            <TextInput label="Email" control={control} name="email" />
-            <TextInput
-                label="Display Name"
-                control={control}
-                name="displayName"
-            />
-            <TextInput
-                label="Password"
-                control={control}
-                type="password"
-                name="password"
-            />
-            <Button
-                type="submit"
-                variant="contained"
-                size="large"
-                color="primary"
-                disabled={!isValid || isSubmitting}
-            >
-                Register
-            </Button>
-            <Typography sx={{ textAlign: "center" }}>
-                Already have an account?
-                <Typography
-                    component={Link}
-                    to="/login"
-                    color="primary"
-                    sx={{ ml: 2 }}
-                >
-                    Sign in
-                </Typography>
-            </Typography>
-        </Paper>
+        </Container>
     );
 }
