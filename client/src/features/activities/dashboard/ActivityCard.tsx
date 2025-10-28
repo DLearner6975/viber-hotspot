@@ -22,7 +22,7 @@ type Props = {
 export default function ActivityCard({ activity }: Props) {
     const { attendees, isHost, isGoing, isCancelled } = activity;
     const label = isHost ? "You are hosting" : "You are going";
-    const color = isHost ? "secondary" : isGoing ? "warning" : "default";
+    const color = isHost ? "secondary" : isGoing ? "success" : "default";
 
     return (
         <Card elevation={3} sx={{ borderRadius: 3 }}>
