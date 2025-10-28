@@ -8,6 +8,8 @@ import {
     CardContent,
     CardHeader,
     Container,
+    IconButton,
+    InputAdornment,
     Typography,
 } from "@mui/material";
 import TextInput from "../../app/shared/components/TextInput";
@@ -16,10 +18,12 @@ import {
     registerSchema,
     type RegisterSchema,
 } from "../../lib/schemas/registerSchema";
+import { useState } from "react";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
 
 export default function RegisterForm() {
     const { registerUser } = useAccount();
-
+    const [showPassword, setShowPassword] = useState(false);
     const {
         control,
         handleSubmit,
@@ -29,7 +33,12 @@ export default function RegisterForm() {
         mode: "onTouched",
         resolver: zodResolver(registerSchema),
     });
-
+    const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+    };
     const onSubmit = async (data: RegisterSchema) => {
         await registerUser.mutateAsync(data, {
             onError: (error) => {
@@ -101,8 +110,32 @@ export default function RegisterForm() {
                             <TextInput
                                 label="Password"
                                 control={control}
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
+                                slotProps={{
+                                    input: {
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    onClick={
+                                                        handleClickShowPassword
+                                                    }
+                                                    onMouseDown={
+                                                        handleMouseDownPassword
+                                                    }
+                                                    edge="end"
+                                                    aria-label="toggle password visibility"
+                                                >
+                                                    {showPassword ? (
+                                                        <VisibilityOff />
+                                                    ) : (
+                                                        <Visibility />
+                                                    )}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    },
+                                }}
                             />
                             <Button
                                 type="submit"

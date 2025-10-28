@@ -9,15 +9,21 @@ import {
     CardContent,
     CardHeader,
     Container,
+    IconButton,
+    InputAdornment,
     Typography,
 } from "@mui/material";
 import TextInput from "../../app/shared/components/TextInput";
 import { Link, useLocation, useNavigate } from "react-router";
+import { VisibilityOff, Visibility } from "@mui/icons-material";
+import { useState } from "react";
 
 export default function LoginForm() {
     const { loginUser } = useAccount();
     const navigate = useNavigate();
     const location = useLocation();
+    const [showPassword, setShowPassword] = useState(false);
+
     const {
         control,
         handleSubmit,
@@ -34,7 +40,12 @@ export default function LoginForm() {
             },
         });
     };
-
+    const handleClickShowPassword = () => setShowPassword((prev) => !prev);
+    const handleMouseDownPassword = (
+        event: React.MouseEvent<HTMLButtonElement>
+    ) => {
+        event.preventDefault();
+    };
     return (
         <Container maxWidth="sm">
             <Box sx={{ mt: 6 }}>
@@ -82,8 +93,32 @@ export default function LoginForm() {
                             <TextInput
                                 label="Password"
                                 control={control}
-                                type="password"
+                                type={showPassword ? "text" : "password"}
                                 name="password"
+                                slotProps={{
+                                    input: {
+                                        endAdornment: (
+                                            <InputAdornment position="end">
+                                                <IconButton
+                                                    onClick={
+                                                        handleClickShowPassword
+                                                    }
+                                                    onMouseDown={
+                                                        handleMouseDownPassword
+                                                    }
+                                                    edge="end"
+                                                    aria-label="toggle password visibility"
+                                                >
+                                                    {showPassword ? (
+                                                        <VisibilityOff />
+                                                    ) : (
+                                                        <Visibility />
+                                                    )}
+                                                </IconButton>
+                                            </InputAdornment>
+                                        ),
+                                    },
+                                }}
                             />
                             <Button
                                 type="submit"
