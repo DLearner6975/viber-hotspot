@@ -2,7 +2,6 @@ import {
     Box,
     AppBar,
     Toolbar,
-    Typography,
     Container,
     MenuItem,
     CircularProgress,
@@ -14,7 +13,7 @@ import {
     Avatar,
     useMediaQuery,
 } from "@mui/material";
-import { Group } from "@mui/icons-material";
+
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { NavLink } from "react-router";
@@ -24,6 +23,7 @@ import { Observer } from "mobx-react-lite";
 import { useAccount } from "../../lib/hooks/useAccount";
 import { useEffect, useState } from "react";
 import UserMenu from "./UserMenu";
+import { ViberHotspotAlt } from "../shared/components/icons/ViberHotspotAlt";
 
 export default function NavBar() {
     const { uiStore } = useStore();
@@ -55,7 +55,7 @@ export default function NavBar() {
                 position="fixed"
                 sx={{
                     backgroundImage: (theme) =>
-                        `linear-gradient(135deg, ${theme.palette.primary[900]} 0%, ${theme.palette.primary[600]} 69%, ${theme.palette.primary.main} 89%)`,
+                        `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 69%, ${theme.palette.primary.main} 89%)`,
                 }}
             >
                 <Container maxWidth="xl">
@@ -66,19 +66,23 @@ export default function NavBar() {
                         }}
                     >
                         <Box>
+                            {/* <ViberHotspot
+                                style={{
+                                    height: 40,
+                                    width: "auto",
+                                    display: "block",
+                                }}
+                            /> */}
                             <MenuItem
                                 component={NavLink}
                                 to="/"
-                                sx={{ display: "flex", gap: 2 }}
+                                sx={{ display: "flex", gap: 2, p: 0 }}
                             >
-                                <Group fontSize="large" />
-                                <Typography
-                                    sx={{ position: "relative" }}
-                                    variant="h4"
-                                    fontWeight="bold"
-                                >
-                                    Reactivities
-                                </Typography>
+                                <ViberHotspotAlt
+                                    height={72}
+                                    width={100}
+                                    fill="white"
+                                />
                                 <Observer>
                                     {() =>
                                         uiStore.isLoading ? (
