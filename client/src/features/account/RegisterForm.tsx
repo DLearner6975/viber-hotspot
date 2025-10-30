@@ -4,14 +4,11 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Box,
     Button,
-    Card,
-    CardContent,
-    CardHeader,
-    Container,
     IconButton,
     InputAdornment,
     Typography,
 } from "@mui/material";
+
 import TextInput from "../../app/shared/components/TextInput";
 import { Link } from "react-router";
 import {
@@ -20,6 +17,7 @@ import {
 } from "../../lib/schemas/registerSchema";
 import { useState } from "react";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
+import LoginCard from "../../app/shared/components/LoginCard";
 
 export default function RegisterForm() {
     const { registerUser } = useAccount();
@@ -59,108 +57,73 @@ export default function RegisterForm() {
     };
 
     return (
-        <Container maxWidth="sm">
-            <Box sx={{ mt: 6 }}>
-                <Card sx={{ overflow: "visible", position: "relative" }}>
-                    <CardHeader
-                        sx={{
-                            bgcolor: "primary.main",
-                            color: "white",
-                            borderRadius: 1,
-                            boxShadow: 3,
-                            position: "absolute",
-                            left: 16,
-                            right: 16,
-                            transform: "translateY(-50%)",
-                            p: 6,
-                        }}
-                        title="Register"
-                        slotProps={{
-                            title: {
-                                variant: "h5",
-                                fontWeight: 300,
-                                textAlign: "center",
-                            },
-                        }}
-                    />
-                    <CardContent sx={{ pt: 10 }}>
-                        <Box
-                            component="form"
-                            onSubmit={handleSubmit(onSubmit)}
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 3,
-                                p: 3,
-                                maxWidth: "md",
-                                mx: "auto",
-                                borderRadius: 3,
-                            }}
-                        >
-                            <TextInput
-                                label="Email"
-                                control={control}
-                                name="email"
-                            />
-                            <TextInput
-                                label="Display Name"
-                                control={control}
-                                name="displayName"
-                            />
-                            <TextInput
-                                label="Password"
-                                control={control}
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                slotProps={{
-                                    input: {
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    onClick={
-                                                        handleClickShowPassword
-                                                    }
-                                                    onMouseDown={
-                                                        handleMouseDownPassword
-                                                    }
-                                                    edge="end"
-                                                    aria-label="toggle password visibility"
-                                                >
-                                                    {showPassword ? (
-                                                        <VisibilityOff />
-                                                    ) : (
-                                                        <Visibility />
-                                                    )}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    },
-                                }}
-                            />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                size="large"
-                                color="primary"
-                                disabled={!isValid || isSubmitting}
-                            >
-                                Register
-                            </Button>
-                            <Typography sx={{ textAlign: "center" }}>
-                                Already have an account?
-                                <Typography
-                                    component={Link}
-                                    to="/login"
-                                    color="secondary"
-                                    sx={{ ml: 2 }}
-                                >
-                                    Sign in
-                                </Typography>
-                            </Typography>
-                        </Box>
-                    </CardContent>
-                </Card>
+        <LoginCard title="Register">
+            <Box
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                    p: 3,
+                    maxWidth: "md",
+                    mx: "auto",
+                    borderRadius: 3,
+                }}
+            >
+                <TextInput label="Email" control={control} name="email" />
+                <TextInput
+                    label="Display Name"
+                    control={control}
+                    name="displayName"
+                />
+                <TextInput
+                    label="Password"
+                    control={control}
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        aria-label="toggle password visibility"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    disabled={!isValid || isSubmitting}
+                >
+                    Register
+                </Button>
+                <Typography sx={{ textAlign: "center" }}>
+                    Already have an account?
+                    <Typography
+                        component={Link}
+                        to="/login"
+                        color="secondary"
+                        sx={{ ml: 2 }}
+                    >
+                        Sign in
+                    </Typography>
+                </Typography>
             </Box>
-        </Container>
+        </LoginCard>
     );
 }

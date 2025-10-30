@@ -5,10 +5,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Box,
     Button,
-    Card,
-    CardContent,
-    CardHeader,
-    Container,
     IconButton,
     InputAdornment,
     Typography,
@@ -17,6 +13,7 @@ import TextInput from "../../app/shared/components/TextInput";
 import { Link, useLocation, useNavigate } from "react-router";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useState } from "react";
+import LoginCard from "../../app/shared/components/LoginCard";
 
 export default function LoginForm() {
     const { loginUser } = useAccount();
@@ -47,103 +44,68 @@ export default function LoginForm() {
         event.preventDefault();
     };
     return (
-        <Container maxWidth="sm">
-            <Box sx={{ mt: 6 }}>
-                <Card sx={{ overflow: "visible", position: "relative" }}>
-                    <CardHeader
-                        sx={{
-                            bgcolor: "primary.main",
-                            color: "white",
-                            borderRadius: 1,
-                            boxShadow: 3,
-                            position: "absolute",
-                            left: 16,
-                            right: 16,
-                            transform: "translateY(-50%)",
-                            p: 6,
-                        }}
-                        title="Login"
-                        slotProps={{
-                            title: {
-                                variant: "h5",
-                                fontWeight: 300,
-                                textAlign: "center",
-                            },
-                        }}
-                    />
-                    <CardContent sx={{ pt: 10 }}>
-                        <Box
-                            component="form"
-                            onSubmit={handleSubmit(onSubmit)}
-                            sx={{
-                                display: "flex",
-                                flexDirection: "column",
-                                gap: 3,
-                                p: 3,
-                                maxWidth: "md",
-                                mx: "auto",
-                                borderRadius: 3,
-                            }}
-                        >
-                            <TextInput
-                                label="Email"
-                                control={control}
-                                name="email"
-                            />
-                            <TextInput
-                                label="Password"
-                                control={control}
-                                type={showPassword ? "text" : "password"}
-                                name="password"
-                                slotProps={{
-                                    input: {
-                                        endAdornment: (
-                                            <InputAdornment position="end">
-                                                <IconButton
-                                                    onClick={
-                                                        handleClickShowPassword
-                                                    }
-                                                    onMouseDown={
-                                                        handleMouseDownPassword
-                                                    }
-                                                    edge="end"
-                                                    aria-label="toggle password visibility"
-                                                >
-                                                    {showPassword ? (
-                                                        <VisibilityOff />
-                                                    ) : (
-                                                        <Visibility />
-                                                    )}
-                                                </IconButton>
-                                            </InputAdornment>
-                                        ),
-                                    },
-                                }}
-                            />
-                            <Button
-                                type="submit"
-                                variant="contained"
-                                size="large"
-                                color="primary"
-                                disabled={!isValid || isSubmitting}
-                            >
-                                Login
-                            </Button>
-                            <Typography sx={{ textAlign: "center" }}>
-                                Don't have an account?
-                                <Typography
-                                    component={Link}
-                                    to="/register"
-                                    color="secondary"
-                                    sx={{ ml: 2 }}
-                                >
-                                    Sign up
-                                </Typography>
-                            </Typography>
-                        </Box>
-                    </CardContent>
-                </Card>
+        <LoginCard title="Login">
+            <Box
+                component="form"
+                onSubmit={handleSubmit(onSubmit)}
+                sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: 3,
+                    p: 3,
+                    maxWidth: "md",
+                    mx: "auto",
+                    borderRadius: 3,
+                }}
+            >
+                <TextInput label="Email" control={control} name="email" />
+                <TextInput
+                    label="Password"
+                    control={control}
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    slotProps={{
+                        input: {
+                            endAdornment: (
+                                <InputAdornment position="end">
+                                    <IconButton
+                                        onClick={handleClickShowPassword}
+                                        onMouseDown={handleMouseDownPassword}
+                                        edge="end"
+                                        aria-label="toggle password visibility"
+                                    >
+                                        {showPassword ? (
+                                            <VisibilityOff />
+                                        ) : (
+                                            <Visibility />
+                                        )}
+                                    </IconButton>
+                                </InputAdornment>
+                            ),
+                        },
+                    }}
+                />
+                <Button
+                    type="submit"
+                    variant="contained"
+                    size="large"
+                    color="primary"
+                    disabled={!isValid || isSubmitting}
+                >
+                    Login
+                </Button>
+                <Typography sx={{ textAlign: "center" }}>
+                    Don't have an account?
+                    <Typography
+                        component={Link}
+                        to="/register"
+                        color="secondary"
+                        sx={{ ml: 2 }}
+                    >
+                        Sign up
+                    </Typography>
+                </Typography>
             </Box>
-        </Container>
+        </LoginCard>
     );
 }

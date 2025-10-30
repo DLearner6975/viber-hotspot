@@ -23,7 +23,7 @@ import { Observer } from "mobx-react-lite";
 import { useAccount } from "../../lib/hooks/useAccount";
 import { useEffect, useState } from "react";
 import UserMenu from "./UserMenu";
-import { ViberHotspotAlt } from "../shared/components/icons/ViberHotspotAlt";
+import { ViberHotspotAlt } from "../shared/icons/ViberHotspotAlt";
 
 export default function NavBar() {
     const { uiStore } = useStore();
@@ -60,19 +60,14 @@ export default function NavBar() {
             >
                 <Container maxWidth="xl">
                     <Toolbar
+                        disableGutters
                         sx={{
                             display: "flex",
                             justifyContent: "space-between",
+                            p: 0,
                         }}
                     >
                         <Box>
-                            {/* <ViberHotspot
-                                style={{
-                                    height: 40,
-                                    width: "auto",
-                                    display: "block",
-                                }}
-                            /> */}
                             <MenuItem
                                 component={NavLink}
                                 to="/"
