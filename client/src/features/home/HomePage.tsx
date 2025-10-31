@@ -87,53 +87,129 @@ export default function HomePage() {
                     position: "relative",
                 }}
             >
-                <motion.div style={{ opacity, y: yTransform }}>
-                    <Stack direction="row" alignItems="flex-end">
-                        <ViberHotspot height={100} width={150} />
-                        <Typography
-                            variant="h2"
-                            sx={{
-                                fontWeight: 700,
-                                background:
-                                    "linear-gradient(90deg, #f03869, #9078f6)",
-                                WebkitBackgroundClip: "text",
-                                WebkitTextFillColor: "transparent",
-                                textAlign: "center",
-                                mb: 2,
+                <motion.div
+                    style={{ opacity, y: yTransform }}
+                    initial={{ scale: 0.95, opacity: 0, y: 60 }}
+                    animate={{ scale: 1, opacity: 1, y: 0 }}
+                    transition={{
+                        type: "spring",
+                        stiffness: 60,
+                        damping: 14,
+                        duration: 0.7,
+                    }}
+                >
+                    <Stack direction="row" alignItems="flex-end" spacing={2}>
+                        <motion.div
+                            initial={{ x: -60, rotate: -15, opacity: 0 }}
+                            animate={{ x: 0, rotate: 0, opacity: 1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 80,
+                                delay: 0.15,
                             }}
                         >
-                            Viber Hotspot
-                        </Typography>
+                            <ViberHotspot height={120} width={150} />
+                        </motion.div>
+                        <motion.div
+                            initial={{ x: 40, opacity: 0 }}
+                            animate={{ x: 0, opacity: 1 }}
+                            transition={{
+                                type: "spring",
+                                stiffness: 70,
+                                delay: 0.25,
+                            }}
+                        >
+                            <Typography
+                                variant="h2"
+                                sx={{
+                                    fontWeight: 700,
+                                    background:
+                                        "linear-gradient(90deg, #f03869, #9078f6)",
+                                    WebkitBackgroundClip: "text",
+                                    WebkitTextFillColor: "transparent",
+                                    textAlign: "center",
+                                    mb: 2,
+                                    letterSpacing: 2,
+                                }}
+                            >
+                                <motion.span
+                                    initial={{ letterSpacing: "0.1em" }}
+                                    animate={{ letterSpacing: "0.15em" }}
+                                    transition={{
+                                        repeat: Infinity,
+                                        repeatType: "mirror",
+                                        duration: 2.5,
+                                        ease: "easeInOut",
+                                    }}
+                                >
+                                    Viber Hotspot
+                                </motion.span>
+                            </Typography>
+                        </motion.div>
                     </Stack>
-                    <Typography
-                        variant="h6"
-                        sx={{ color: "#ccc", textAlign: "center", mb: 4 }}
-                    >
-                        Discover, chat about, and attend awesome activities and
-                        events with friends—your local social hub!
-                    </Typography>
-
-                    <Button
-                        component={Link}
-                        to="/activities"
-                        variant="contained"
-                        sx={{
-                            background:
-                                "linear-gradient(90deg, #f03869, #9078f6)",
-                            color: "#fff",
-                            fontWeight: "bold",
-                            borderRadius: "999px",
-                            px: 4,
-                            py: 1.5,
-                            "&:hover": {
-                                opacity: 0.85,
-                                transform: "scale(1.05)",
-                                transition: "all 0.3s ease",
-                            },
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{
+                            delay: 0.4,
+                            duration: 0.8,
+                            ease: "easeOut",
                         }}
                     >
-                        Explore Activities
-                    </Button>
+                        <Typography
+                            variant="h6"
+                            sx={{ color: "#ccc", textAlign: "center", mb: 4 }}
+                        >
+                            Discover, chat about, and attend awesome activities
+                            and events with friends—your local social hub!
+                        </Typography>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.92 }}
+                        animate={{
+                            opacity: 1,
+                            scale: [1, 1.045, 1],
+                            boxShadow: [
+                                "0 4px 24px 2px rgba(240,56,105,0.07)",
+                                "0 4px 28px 6px rgba(144,120,246,0.13)",
+                                "0 4px 24px 2px rgba(240,56,105,0.07)",
+                            ],
+                        }}
+                        transition={{
+                            delay: 0.9,
+                            duration: 1.6,
+                            ease: "easeInOut",
+                            repeat: Infinity,
+                            repeatType: "mirror",
+                        }}
+                        style={{ display: "inline-block" }}
+                    >
+                        <Button
+                            component={Link}
+                            to="/activities"
+                            variant="contained"
+                            sx={{
+                                background:
+                                    "linear-gradient(90deg, #f03869, #9078f6)",
+                                color: "#fff",
+                                fontWeight: "bold",
+                                borderRadius: "999px",
+                                px: 4,
+                                py: 1.5,
+                                fontSize: "1.1rem",
+                                boxShadow:
+                                    "0 4px 24px 2px rgba(240,56,105,0.17)",
+                                "&:hover": {
+                                    opacity: 0.85,
+                                    transform: "scale(1.05)",
+                                    transition: "all 0.3s",
+                                },
+                            }}
+                        >
+                            Explore Activities
+                        </Button>
+                    </motion.div>
                 </motion.div>
             </Container>
             {/* Gooey Line */}
