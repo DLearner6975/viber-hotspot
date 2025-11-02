@@ -9,7 +9,7 @@ import {
     Grid,
 } from "@mui/material";
 import { Link } from "react-router";
-import SectionCard from "../../app/shared/components/SectionCard";
+import SectionCard from "@shared/components/SectionCard";
 
 type Props = { activity: Activity };
 

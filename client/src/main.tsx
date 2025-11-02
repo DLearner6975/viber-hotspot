@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { RouterProvider } from "react-router";
-import { store, StoreContext } from "./lib/stores/store.ts";
+import { store, StoreContext } from "@lib/stores/store.ts";
 import { ToastContainer } from "react-toastify";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";

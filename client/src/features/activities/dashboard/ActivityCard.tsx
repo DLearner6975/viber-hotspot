@@ -12,8 +12,8 @@ import {
 import { Link } from "react-router";
 import AccessTime from "@mui/icons-material/AccessTime";
 import Place from "@mui/icons-material/Place";
-import { formatDate } from "../../../lib/util/util";
-import AvatarPopover from "../../../app/shared/components/AvatarPopover";
+import { formatDate } from "@lib/util/util";
+import AvatarPopover from "@shared/components/AvatarPopover";
 
 type Props = {
     activity: Activity;

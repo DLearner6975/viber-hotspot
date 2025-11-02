@@ -2,7 +2,7 @@ import { Avatar } from "@mui/material";
 import Popover from "@mui/material/Popover";
 import { useState, type MouseEvent } from "react";
 import { Link } from "react-router";
-import ProfileCard from "../../../features/profiles/ProfileCard";
+import ProfileCard from "@features/profiles/ProfileCard";
 
 type Props = { profile: Profile };
 export default function AvatarPopover({ profile }: Props) {

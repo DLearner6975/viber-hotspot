@@ -1,18 +1,18 @@
 import { Box, Button } from "@mui/material";
-import { useActivities } from "../../../lib/hooks/useActivities";
+import { useActivities } from "@lib/hooks/useActivities";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
-import type { ActivitySchema } from "../../../lib/schemas/activitySchemas";
-import { activitySchema } from "../../../lib/schemas/activitySchemas";
+import type { ActivitySchema } from "@lib/schemas/activitySchemas";
+import { activitySchema } from "@lib/schemas/activitySchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
-import TextInput from "../../../app/shared/components/TextInput";
+import TextInput from "@shared/components/TextInput";
 import { categoryOptions } from "./categoryOptions";
-import SelectInput from "../../../app/shared/components/SelectInput";
-import DateTimeInput from "../../../app/shared/components/DateTimeInput";
-import LocationInput from "../../../app/shared/components/LocationInput";
-import SectionCard from "../../../app/shared/components/SectionCard";
-import LoadingSpinner from "../../../app/shared/components/LoadingSpinner";
+import SelectInput from "@shared/components/SelectInput";
+import DateTimeInput from "@shared/components/DateTimeInput";
+import LocationInput from "@shared/components/LocationInput";
+import SectionCard from "@shared/components/SectionCard";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function ActivityForm() {
     const { reset, handleSubmit, control } = useForm<ActivitySchema>({

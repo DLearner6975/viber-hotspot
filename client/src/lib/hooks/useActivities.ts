@@ -5,10 +5,10 @@ import {
     useQuery,
     useQueryClient,
 } from "@tanstack/react-query";
-import agent from "../api/agents";
+import agent from "@lib/api/agents";
 import { useLocation } from "react-router";
-import { useAccount } from "./useAccount";
-import { useStore } from "./useStore";
+import { useAccount } from "@lib/hooks/useAccount";
+import { useStore } from "@lib/hooks/useStore";
 import type { FieldValues } from "react-hook-form";
 
 export const useActivities = (id?: string) => {

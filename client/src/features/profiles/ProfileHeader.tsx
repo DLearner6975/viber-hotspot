@@ -10,7 +10,7 @@ import {
     Typography,
 } from "@mui/material";
 import { useParams } from "react-router";
-import { useProfile } from "../../lib/hooks/useProfile";
+import { useProfile } from "@lib/hooks/useProfile";
 
 export default function ProfileHeader() {
     const { id } = useParams();

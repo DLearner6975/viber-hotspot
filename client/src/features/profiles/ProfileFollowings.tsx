@@ -1,9 +1,9 @@
 import { useParams } from "react-router";
-import { useProfile } from "../../lib/hooks/useProfile";
+import { useProfile } from "@lib/hooks/useProfile";
 import Box from "@mui/material/Box";
 import { Divider, Typography } from "@mui/material";
 import ProfileCard from "./ProfileCard";
-import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 type Props = {
     activeTab: number;

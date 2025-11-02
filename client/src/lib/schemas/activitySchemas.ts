@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { requiredDate, requiredString } from "../util/util";
+import { requiredDate, requiredString } from "@lib/util/util";
 
 export const activitySchema = z.object({
     title: requiredString("Title"),

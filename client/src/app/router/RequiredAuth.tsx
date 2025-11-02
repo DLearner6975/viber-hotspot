@@ -1,6 +1,6 @@
 import { Navigate, Outlet, useLocation } from "react-router";
-import { useAccount } from "../../lib/hooks/useAccount";
-import LoadingSpinner from "../shared/components/LoadingSpinner";
+import { useAccount } from "@lib/hooks/useAccount";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function RequiredAuth() {
     const { currentUser, loadingUserInfo } = useAccount();

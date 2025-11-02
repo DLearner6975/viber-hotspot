@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useAccount } from "../../lib/hooks/useAccount";
+import { useAccount } from "@lib/hooks/useAccount";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Box,
@@ -9,15 +9,15 @@ import {
     Typography,
 } from "@mui/material";
 
-import TextInput from "../../app/shared/components/TextInput";
+import TextInput from "@shared/components/TextInput";
 import { Link } from "react-router";
 import {
     registerSchema,
     type RegisterSchema,
-} from "../../lib/schemas/registerSchema";
+} from "@lib/schemas/registerSchema";
 import { useState } from "react";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
-import LoginCard from "../../app/shared/components/LoginCard";
+import LoginCard from "@shared/components/LoginCard";
 
 export default function RegisterForm() {
     const { registerUser } = useAccount();

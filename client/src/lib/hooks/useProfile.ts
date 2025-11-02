@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import agents from "../api/agents";
+import agents from "@lib/api/agents";
 import { useMemo, useState } from "react";
 
 export const useProfile = (id?: string, predicate?: string) => {

@@ -1,10 +1,10 @@
 import { Box, Typography } from "@mui/material";
 import ActivityCard from "./ActivityCard";
-import { useActivities } from "../../../lib/hooks/useActivities";
+import { useActivities } from "@lib/hooks/useActivities";
 import { useInView } from "react-intersection-observer";
 import { useEffect } from "react";
 import { observer } from "mobx-react-lite";
-import LoadingSpinner from "../../../app/shared/components/LoadingSpinner";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 const ActivityList = observer(function ActivityList() {
     const { activitiesGroup, isLoading, hasNextPage, fetchNextPage } =

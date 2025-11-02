@@ -4,7 +4,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Box from "@mui/material/Box";
 import { Avatar, Divider, ListItemIcon, ListItemText } from "@mui/material";
-import { useAccount } from "../../lib/hooks/useAccount";
+import { useAccount } from "@lib/hooks/useAccount";
 import { Add, Logout, Person } from "@mui/icons-material";
 import { Link } from "react-router";
 

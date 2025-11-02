@@ -9,7 +9,7 @@ import {
 } from "framer-motion";
 import { Box, Typography, Container, Button, Stack } from "@mui/material";
 import { Link } from "react-router";
-import { ViberHotspot } from "../../app/shared/icons/ViberHotspot";
+import { ViberHotspot } from "@shared/icons/ViberHotspot";
 
 export default function HomePage() {
     const ref = useRef<HTMLDivElement>(null);

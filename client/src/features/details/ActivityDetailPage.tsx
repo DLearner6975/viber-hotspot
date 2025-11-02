@@ -1,11 +1,11 @@
 import { Grid, Typography } from "@mui/material";
 import { useParams } from "react-router";
-import { useActivities } from "../../lib/hooks/useActivities";
+import { useActivities } from "@lib/hooks/useActivities";
 import ActivityDetailsChat from "./ActivityDetailsChat";
 import ActivityDetailsInfo from "./ActivityDetailsInfo";
 import ActivityDetailsHeader from "./ActivityDetailsHeader";
 import ActivityDetailsSidebar from "./ActivityDetailsSidebar";
-import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function ActivityDetailPage() {
     const { id } = useParams();

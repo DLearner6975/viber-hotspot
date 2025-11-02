@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
-import { useAccount } from "../../lib/hooks/useAccount";
-import { loginSchema, type LoginSchema } from "../../lib/schemas/loginSchema";
+import { useAccount } from "@lib/hooks/useAccount";
+import { loginSchema, type LoginSchema } from "@lib/schemas/loginSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
     Box,
@@ -9,11 +9,11 @@ import {
     InputAdornment,
     Typography,
 } from "@mui/material";
-import TextInput from "../../app/shared/components/TextInput";
+import TextInput from "@shared/components/TextInput";
 import { Link, useLocation, useNavigate } from "react-router";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import { useState } from "react";
-import LoginCard from "../../app/shared/components/LoginCard";
+import LoginCard from "@shared/components/LoginCard";
 
 export default function LoginForm() {
     const { loginUser } = useAccount();

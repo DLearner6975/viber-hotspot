@@ -8,8 +8,8 @@ import {
     Chip,
 } from "@mui/material";
 import { Link } from "react-router";
-import { formatDate } from "../../lib/util/util";
-import { useActivities } from "../../lib/hooks/useActivities";
+import { formatDate } from "@lib/util/util";
+import { useActivities } from "@lib/hooks/useActivities";
 
 type Props = {
     activity: Activity;

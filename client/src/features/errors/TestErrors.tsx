@@ -1,7 +1,7 @@
 import { Alert, Button, ButtonGroup, Typography } from "@mui/material";
 import { useMutation } from "@tanstack/react-query";
 import { useState } from "react";
-import agent from "../../lib/api/agents";
+import agent from "@lib/api/agents";
 // import {} from "react-toastify";
 
 export default function TestErrors() {

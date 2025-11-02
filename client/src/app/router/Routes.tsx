@@ -1,16 +1,16 @@
 import { createBrowserRouter, Navigate } from "react-router";
-import LoginForm from "../../features/account/LoginForm";
-import RegisterForm from "../../features/account/RegisterForm";
-import ActivityDashboard from "../../features/activities/dashboard/ActivityDashboard";
-import ActivityForm from "../../features/activities/form/ActivityForm";
-import Counter from "../../features/counter/Counter";
-import ActivityDetailPage from "../../features/details/ActivityDetailPage";
-import NotFound from "../../features/errors/NotFound";
-import ServerError from "../../features/errors/ServerError";
-import TestErrors from "../../features/errors/TestErrors";
+import LoginForm from "@features/account/LoginForm";
+import RegisterForm from "@features/account/RegisterForm";
+import ActivityDashboard from "@features/activities/dashboard/ActivityDashboard";
+import ActivityForm from "@features/activities/form/ActivityForm";
+import Counter from "@features/counter/Counter";
+import ActivityDetailPage from "@features/details/ActivityDetailPage";
+import NotFound from "@features/errors/NotFound";
+import ServerError from "@features/errors/ServerError";
+import TestErrors from "@features/errors/TestErrors";
 import App from "../layout/App";
 import RequiredAuth from "./RequiredAuth";
-import ProfilePage from "../../features/profiles/ProfilePage";
+import ProfilePage from "@features/profiles/ProfilePage";
 
 export const router = createBrowserRouter([
     {

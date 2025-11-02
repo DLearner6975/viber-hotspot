@@ -2,8 +2,8 @@ import { Grid } from "@mui/material";
 import ProfileHeader from "./ProfileHeader";
 import ProfileContent from "./ProfileContent";
 import { useParams } from "react-router";
-import { useProfile } from "../../lib/hooks/useProfile";
-import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
+import { useProfile } from "@lib/hooks/useProfile";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function ProfilePage() {
     const { id } = useParams();

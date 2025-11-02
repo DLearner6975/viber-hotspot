@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { requiredString } from "../util/util";
+import { requiredString } from "@lib/util/util";
 
 export const registerSchema = z.object({
     email: z.email({ message: "email is required" }),

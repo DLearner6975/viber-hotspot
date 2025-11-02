@@ -16,14 +16,14 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 import { useTheme } from "@mui/material/styles";
 import { NavLink } from "react-router";
-import MenuItemLink from "../shared/components/MenuItemLink";
-import { useStore } from "../../lib/hooks/useStore";
+import MenuItemLink from "@shared/components/MenuItemLink";
+import { useStore } from "@lib/hooks/useStore";
 import { Observer } from "mobx-react-lite";
-import { useAccount } from "../../lib/hooks/useAccount";
+import { useAccount } from "@lib/hooks/useAccount";
 import { useEffect, useState } from "react";
 import UserMenu from "./UserMenu";
-import { ViberHotspotAlt } from "../shared/icons/ViberHotspotAlt";
-import LoadingSpinner from "../shared/components/LoadingSpinner";
+import { ViberHotspotAlt } from "@shared/icons/ViberHotspotAlt";
+import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function NavBar() {
     const { uiStore } = useStore();

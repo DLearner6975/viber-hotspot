@@ -8,8 +8,8 @@ import {
     CircularProgress,
 } from "@mui/material";
 import { Link, useParams } from "react-router";
-import { useComments } from "../../lib/hooks/useComments";
-import { timeAgo } from "../../lib/util/util";
+import { useComments } from "@lib/hooks/useComments";
+import { timeAgo } from "@lib/util/util";
 import { useForm, type FieldValues } from "react-hook-form";
 import { observer } from "mobx-react-lite";
 

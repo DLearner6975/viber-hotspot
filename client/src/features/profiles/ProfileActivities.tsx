@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import { Link, useParams } from "react-router";
 import { format } from "date-fns";
-import { useProfile } from "../../lib/hooks/useProfile.ts";
+import { useProfile } from "@lib/hooks/useProfile.ts";
 
 export default function ProfileActivities() {
     const [activeTab, setActiveTab] = useState(0);

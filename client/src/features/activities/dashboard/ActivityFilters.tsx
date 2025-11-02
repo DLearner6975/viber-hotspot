@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
-import { useStore } from "../../../lib/hooks/useStore";
+import { useStore } from "@lib/hooks/useStore";
 import { observer } from "mobx-react-lite";
 
 const ActivityFilters = observer(function ActivityFilters() {
