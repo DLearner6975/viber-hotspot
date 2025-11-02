@@ -138,7 +138,7 @@ const TabPanel = ({ children, value, index }: TabPanelProps) => {
                         sx={{
                             p: 3,
                             width: "100%",
-                            height: "434px",
+                            height: "100%",
                             borderRadius: "12px",
                         }}
                     >

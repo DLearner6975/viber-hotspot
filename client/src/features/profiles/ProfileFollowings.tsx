@@ -3,6 +3,7 @@ import { useProfile } from "../../lib/hooks/useProfile";
 import Box from "@mui/material/Box";
 import { Divider, Typography } from "@mui/material";
 import ProfileCard from "./ProfileCard";
+import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
 
 type Props = {
     activeTab: number;
@@ -27,7 +28,7 @@ export default function ProfileFollowings({ activeTab }: Props) {
             </Box>
             <Divider sx={{ my: 2 }} />
             {loadingFollowings ? (
-                <Typography>Loading...</Typography>
+                <LoadingSpinner />
             ) : (
                 <Box display="flex" mt={3} gap={3}>
                     {followings?.map((profile) => (

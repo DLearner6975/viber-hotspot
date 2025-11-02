@@ -5,12 +5,13 @@ import ActivityDetailsChat from "./ActivityDetailsChat";
 import ActivityDetailsInfo from "./ActivityDetailsInfo";
 import ActivityDetailsHeader from "./ActivityDetailsHeader";
 import ActivityDetailsSidebar from "./ActivityDetailsSidebar";
+import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
 
 export default function ActivityDetailPage() {
     const { id } = useParams();
     const { activity, isLoadingActivity } = useActivities(id);
 
-    if (isLoadingActivity) return <Typography>Loading...</Typography>;
+    if (isLoadingActivity) return <LoadingSpinner />;
 
     if (!activity) return <Typography>Activity not found</Typography>;
 

@@ -3,12 +3,13 @@ import ProfileHeader from "./ProfileHeader";
 import ProfileContent from "./ProfileContent";
 import { useParams } from "react-router";
 import { useProfile } from "../../lib/hooks/useProfile";
+import LoadingSpinner from "../../app/shared/components/LoadingSpinner";
 
 export default function ProfilePage() {
     const { id } = useParams();
     const { profile, loadingProfile } = useProfile(id);
 
-    if (loadingProfile) return <div>Loading profile...</div>;
+    if (loadingProfile) return <LoadingSpinner size={50} />;
 
     if (!profile) return <div>Profile not found</div>;
 

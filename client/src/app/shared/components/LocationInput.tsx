@@ -4,7 +4,6 @@ import {
     List,
     ListItemButton,
     TextField,
-    Typography,
     type TextFieldProps,
 } from "@mui/material";
 import axios from "axios";
@@ -14,6 +13,7 @@ import {
     type UseControllerProps,
     useController,
 } from "react-hook-form";
+import LoadingSpinner from "./LoadingSpinner";
 
 type Props<T extends FieldValues> = { label: string } & UseControllerProps<T> &
     TextFieldProps;
@@ -93,7 +93,7 @@ export default function LocationInput<T extends FieldValues>(props: Props<T>) {
                 error={!!fieldState.error}
                 helperText={fieldState.error?.message}
             />
-            {loading && <Typography>Loading...</Typography>}
+            {loading && <LoadingSpinner />}
             {suggestions.length > 0 && (
                 <List>
                     {suggestions.map((suggestion) => (

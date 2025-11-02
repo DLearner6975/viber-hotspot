@@ -4,7 +4,6 @@ import {
     Toolbar,
     Container,
     MenuItem,
-    CircularProgress,
     IconButton,
     Menu,
     ListItemIcon,
@@ -24,6 +23,7 @@ import { useAccount } from "../../lib/hooks/useAccount";
 import { useEffect, useState } from "react";
 import UserMenu from "./UserMenu";
 import { ViberHotspotAlt } from "../shared/icons/ViberHotspotAlt";
+import LoadingSpinner from "../shared/components/LoadingSpinner";
 
 export default function NavBar() {
     const { uiStore } = useStore();
@@ -81,16 +81,7 @@ export default function NavBar() {
                                 <Observer>
                                     {() =>
                                         uiStore.isLoading ? (
-                                            <CircularProgress
-                                                size={20}
-                                                thickness={7}
-                                                sx={{
-                                                    color: "white",
-                                                    position: "absolute",
-                                                    top: "30%",
-                                                    left: "105%",
-                                                }}
-                                            />
+                                            <LoadingSpinner color="white" />
                                         ) : null
                                     }
                                 </Observer>

@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { useActivities } from "../../../lib/hooks/useActivities";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
@@ -12,6 +12,7 @@ import SelectInput from "../../../app/shared/components/SelectInput";
 import DateTimeInput from "../../../app/shared/components/DateTimeInput";
 import LocationInput from "../../../app/shared/components/LocationInput";
 import SectionCard from "../../../app/shared/components/SectionCard";
+import LoadingSpinner from "../../../app/shared/components/LoadingSpinner";
 
 export default function ActivityForm() {
     const { reset, handleSubmit, control } = useForm<ActivitySchema>({
@@ -55,7 +56,7 @@ export default function ActivityForm() {
         }
     };
 
-    if (isLoadingActivity) return <Typography>Loading...</Typography>;
+    if (isLoadingActivity) return <LoadingSpinner size={50} />;
 
     return (
         <SectionCard

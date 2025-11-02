@@ -12,6 +12,7 @@ import { useState } from "react";
 import PhotoUploadWidget from "../../app/shared/components/PhotoUploadWidget";
 import StarButton from "../../app/shared/components/StarButton.tsx";
 import DeleteButton from "../../app/shared/components/DeleteButton.tsx";
+import LoadingSpinner from "../../app/shared/components/LoadingSpinner.tsx";
 
 export default function ProfilePhotos() {
     const { id } = useParams();
@@ -34,7 +35,7 @@ export default function ProfilePhotos() {
         });
     };
 
-    if (loadingPhotos) return <div>Loading photos...</div>;
+    if (loadingPhotos) return <LoadingSpinner />;
 
     if (!photos) return <div>No photos found for this user</div>;
 
