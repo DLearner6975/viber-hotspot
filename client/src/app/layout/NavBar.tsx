@@ -81,7 +81,7 @@ export default function NavBar() {
                                 <Observer>
                                     {() =>
                                         uiStore.isLoading ? (
-                                            <LoadingSpinner color="white" />
+                                            <LoadingSpinner color="secondary" />
                                         ) : null
                                     }
                                 </Observer>

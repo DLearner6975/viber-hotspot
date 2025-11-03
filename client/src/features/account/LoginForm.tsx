@@ -86,6 +86,8 @@ export default function LoginForm() {
                     }}
                 />
                 <Button
+                    loading={isSubmitting}
+                    loadingPosition="end"
                     type="submit"
                     variant="contained"
                     size="large"

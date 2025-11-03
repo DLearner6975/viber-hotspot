@@ -116,7 +116,12 @@ export default function ProfilePhotos() {
                                                             )
                                                         }
                                                     >
-                                                        <DeleteButton />
+                                                        <DeleteButton
+                                                            loading={
+                                                                deletePhoto.isPending
+                                                            }
+                                                            loadingPosition="end"
+                                                        />
                                                     </Box>
                                                 )}
                                             </div>

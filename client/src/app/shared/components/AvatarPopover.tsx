@@ -47,8 +47,19 @@ export default function AvatarPopover({ profile }: Props) {
                 }}
                 onClose={handlePopoverClose}
                 disableRestoreFocus
+                disableEnforceFocus
+                disableAutoFocus
+                slotProps={{
+                    paper: {
+                        tabIndex: -1,
+                        onMouseEnter: handlePopoverOpen,
+                        onMouseLeave: handlePopoverClose,
+                    },
+                }}
             >
-                <ProfileCard profile={profile} />
+                <div tabIndex={-1}>
+                    <ProfileCard profile={profile} />
+                </div>
             </Popover>
         </>
     );

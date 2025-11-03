@@ -101,6 +101,8 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                     {isHost ? (
                         <>
                             <Button
+                                loading={updateAttendance.isPending}
+                                loadingPosition="end"
                                 variant="contained"
                                 color={isCancelled ? "success" : "error"}
                                 onClick={() => updateAttendance.mutate(id)}
@@ -136,6 +138,8 @@ export default function ActivityDetailsHeader({ activity }: Props) {
                         </>
                     ) : (
                         <Button
+                            loading={updateAttendance.isPending || isCancelled}
+                            loadingPosition="end"
                             variant="contained"
                             color={isGoing ? "primary" : "info"}
                             onClick={() => updateAttendance.mutate(id)}

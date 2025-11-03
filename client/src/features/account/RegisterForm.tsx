@@ -104,6 +104,8 @@ export default function RegisterForm() {
                     }}
                 />
                 <Button
+                    loading={isSubmitting}
+                    loadingPosition="end"
                     type="submit"
                     variant="contained"
                     size="large"

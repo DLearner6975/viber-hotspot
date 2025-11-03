@@ -11,7 +11,7 @@ export default function ActivityDetailPage() {
     const { id } = useParams();
     const { activity, isLoadingActivity } = useActivities(id);
 
-    if (isLoadingActivity) return <LoadingSpinner />;
+    if (isLoadingActivity) return <LoadingSpinner size={50} />;
 
     if (!activity) return <Typography>Activity not found</Typography>;
 

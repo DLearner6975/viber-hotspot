@@ -1,7 +1,11 @@
 import { DeleteOutline, Delete } from "@mui/icons-material";
-import { Box, Button } from "@mui/material";
+import { Box, Button, type ButtonProps } from "@mui/material";
 
-export default function DeleteButton() {
+export default function DeleteButton({
+    loading,
+    loadingPosition = "end",
+    ...props
+}: ButtonProps) {
     return (
         <Box sx={{ position: "relative" }}>
             <Button
@@ -11,6 +15,9 @@ export default function DeleteButton() {
                     position: "relative",
                     cursor: "pointer",
                 }}
+                loading={loading}
+                loadingPosition={loadingPosition}
+                {...props}
             >
                 <DeleteOutline
                     sx={{ fontSize: 32, color: "white", position: "absolute" }}

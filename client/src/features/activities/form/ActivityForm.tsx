@@ -57,7 +57,7 @@ export default function ActivityForm() {
     };
 
     if (isLoadingActivity) return <LoadingSpinner size={50} />;
-
+    const isSubmitting = updateActivity.isPending || createActivity.isPending;
     return (
         <SectionCard
             title={activity ? "Edit Activity" : "Create Activity"}
@@ -105,6 +105,8 @@ export default function ActivityForm() {
                         Cancel
                     </Button>
                     <Button
+                        loading={isSubmitting}
+                        loadingPosition="end"
                         type="submit"
                         variant="contained"
                         color="primary"
@@ -115,9 +117,7 @@ export default function ActivityForm() {
                                 backgroundColor: "primary.dark",
                             },
                         }}
-                        disabled={
-                            updateActivity.isPending || createActivity.isPending
-                        }
+                        disabled={isSubmitting}
                     >
                         Submit
                     </Button>

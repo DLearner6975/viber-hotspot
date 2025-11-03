@@ -110,6 +110,8 @@ export default function PhotoUploadWidget({ uploadPhoto, loading }: Props) {
                         <Button
                             sx={{ my: 1, width: 300 }}
                             onClick={onCrop}
+                            loading={loading}
+                            loadingPosition="end"
                             variant="contained"
                             color="secondary"
                             disabled={loading}

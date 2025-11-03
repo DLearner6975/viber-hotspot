@@ -110,7 +110,9 @@ const StyledTab = styled(Tab)(({ theme }) => ({
             color: theme.palette.primary.main,
         },
         "& svg": {
-            color: theme.palette.primary[400],
+            color: (
+                theme.palette.primary as unknown as Record<string, string>
+            )[400],
         },
     },
 }));
