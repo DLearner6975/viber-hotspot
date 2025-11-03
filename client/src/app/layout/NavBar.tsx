@@ -1,3 +1,4 @@
+//TODO: rework some navbar code to reduce duplication between mobile and desktop menus
 import {
     Box,
     AppBar,
