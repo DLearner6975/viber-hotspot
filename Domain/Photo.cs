@@ -6,11 +6,17 @@ namespace Domain;
 public class Photo
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
-    public string Url { get; set; } = null!;
-    public string? PublicId { get; set; }
+    public required string Url { get; set; } = null!;
+    public required string PublicId
+    {
+        get; set;
+    }
 
     // Navigation property
-    public required string UserId { get; set; }
+    public required string UserId
+    {
+        get; set;
+    }
 
     [JsonIgnore]
     public User User { get; set; } = null!;
