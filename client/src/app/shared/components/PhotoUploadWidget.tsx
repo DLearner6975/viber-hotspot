@@ -63,8 +63,8 @@ export default function PhotoUploadWidget({ uploadPhoto, loading }: Props) {
                 <Box
                     {...getRootProps()}
                     sx={{
-                        border: "dashed 3px #eee",
-                        borderColor: isDragActive ? "green" : "#eee",
+                        border: "dashed 3px white",
+                        borderColor: isDragActive ? "secondary.main" : "white",
                         borderRadius: "5px",
                         paddingTop: "30px",
                         textAlign: "center",
@@ -74,6 +74,8 @@ export default function PhotoUploadWidget({ uploadPhoto, loading }: Props) {
                     <input {...getInputProps()} />
                     <CloudUpload sx={{ fontSize: 80 }} />
                     <Typography variant="h5">Drop image here</Typography>
+                    <Typography variant="h5">or</Typography>
+                    <Typography variant="h5">click to upload</Typography>
                 </Box>
             </Grid>
             <Grid size={4}>
