@@ -90,7 +90,7 @@ export default function ProfileActivities() {
                                 to={`/activities/${activity.id}`}
                                 style={{ textDecoration: "none" }}
                             >
-                                <Card elevation={4}>
+                                <Card elevation={4} sx={{ height: "60%" }}>
                                     <CardMedia
                                         component="img"
                                         height="100"
