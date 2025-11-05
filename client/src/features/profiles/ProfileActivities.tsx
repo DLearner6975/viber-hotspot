@@ -85,7 +85,7 @@ export default function ProfileActivities() {
             >
                 {userActivities &&
                     userActivities.map((activity: Activity) => (
-                        <Grid size={2} key={activity.id}>
+                        <Grid size={{ xs: 12, sm: 6, lg: 2 }} key={activity.id}>
                             <Link
                                 to={`/activities/${activity.id}`}
                                 style={{ textDecoration: "none" }}
