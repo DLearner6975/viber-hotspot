@@ -30,9 +30,29 @@ export default function ProfileFollowings({ activeTab }: Props) {
             {loadingFollowings ? (
                 <LoadingSpinner />
             ) : (
-                <Box display="flex" mt={3} gap={3} overflow="auto">
+                <Box
+                    display="flex"
+                    mt={3}
+                    gap={3}
+                    flexWrap="wrap"
+                    justifyContent="center"
+                    overflow="auto"
+                    maxHeight="600px"
+                >
                     {followings?.map((profile) => (
-                        <ProfileCard key={profile.id} profile={profile} />
+                        <Box
+                            key={profile.id}
+                            sx={{
+                                width: { xs: "100%", sm: "auto" },
+                                display: "flex",
+                                justifyContent: {
+                                    xs: "center",
+                                    sm: "flex-start",
+                                },
+                            }}
+                        >
+                            <ProfileCard profile={profile} />
+                        </Box>
                     ))}
                 </Box>
             )}
