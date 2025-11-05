@@ -1,11 +1,18 @@
-import { Paper, Stack, styled, Tab, Tabs, Typography } from "@mui/material";
+import {
+    Stack,
+    Tabs,
+    Typography,
+    useMediaQuery,
+    useTheme,
+} from "@mui/material";
 import Box from "@mui/material/Box";
-import { useState, type ReactNode } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
 import ProfilePhotos from "./ProfilePhotos";
 import ProfileAbout from "./ProfileAbout";
 import ProfileFollowings from "./ProfileFollowings";
 import ProfileActivities from "./ProfileActivities";
+import { StyledTab } from "./StyledTab";
+import { TabPanel } from "./TabPanel";
 import {
     PersonOutlined,
     MonochromePhotosOutlined,
@@ -16,6 +23,9 @@ import {
 
 export default function ProfileContent() {
     const [value, setValue] = useState(0);
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+    const isDesktop = useMediaQuery(theme.breakpoints.up("lg"));
 
     const tabData = [
         {
@@ -46,34 +56,57 @@ export default function ProfileContent() {
     ];
 
     return (
-        <Stack direction="row" gap={2} mt={2}>
+        <Stack
+            direction={{ xs: "column", lg: "row" }}
+            gap={{ xs: 2, sm: 2, lg: 2 }}
+            mt={2}
+        >
             <Tabs
-                orientation="vertical"
+                orientation={isDesktop ? "vertical" : "horizontal"}
+                variant={isMobile ? "scrollable" : "standard"}
+                scrollButtons={isMobile ? "auto" : false}
                 slotProps={{ indicator: { sx: { display: "none" } } }}
                 value={value}
                 onChange={(_event, newValue) => setValue(newValue)}
                 sx={{
                     "& .MuiTabs-flexContainer": {
-                        gap: 1,
+                        gap: { xs: 0.5, sm: 1, lg: 1 },
+                        flexDirection: isDesktop ? "column" : "row",
                     },
+                    width: { xs: "100%", lg: "auto" },
+                    minWidth: { lg: 280 },
+                    maxWidth: { lg: 320 },
                 }}
             >
                 {tabData.map((tab, index) => (
                     <StyledTab
                         key={index}
+                        $isVertical={isDesktop}
                         label={
-                            <Stack
-                                direction="row"
-                                alignItems="center"
-                                gap={0.5}
-                            >
-                                {tab.icon}
-                                <Box>
-                                    <Typography whiteSpace="nowrap">
-                                        {tab.label}
-                                    </Typography>
-                                </Box>
-                            </Stack>
+                            isMobile ? (
+                                tab.icon
+                            ) : (
+                                <Stack
+                                    direction={{
+                                        xs: "column",
+                                        sm: "row",
+                                        lg: "row",
+                                    }}
+                                    alignItems="center"
+                                    gap={{ xs: 0.25, sm: 0.5, lg: 0.5 }}
+                                    justifyContent="center"
+                                >
+                                    {tab.icon}
+                                    <Box>
+                                        <Typography
+                                            whiteSpace="nowrap"
+                                            variant="body2"
+                                        >
+                                            {tab.label}
+                                        </Typography>
+                                    </Box>
+                                </Stack>
+                            )
                         }
                     />
                 ))}
@@ -86,68 +119,3 @@ export default function ProfileContent() {
         </Stack>
     );
 }
-
-const StyledTab = styled(Tab)(({ theme }) => ({
-    alignItems: "flex-start",
-    border: "1px solid",
-    borderColor: theme.palette.grey[200],
-    textTransform: "none",
-    backgroundColor: theme.palette.grey[50],
-    borderRadius: "12px",
-    padding: "24px",
-    transition: "all 0.2s ease-in-out",
-    "& p": {
-        color: theme.palette.grey[500],
-    },
-    "& svg": {
-        fontSize: 30,
-        color: theme.palette.grey[400],
-    },
-    "&.Mui-selected, &:hover": {
-        backgroundColor: "#fff",
-        boxShadow: theme.shadows[3],
-        "& p": {
-            color: theme.palette.primary.main,
-        },
-        "& svg": {
-            color: (
-                theme.palette.primary as unknown as Record<string, string>
-            )[400],
-        },
-    },
-}));
-
-type TabPanelProps = {
-    children: ReactNode;
-    value: number;
-    index: number;
-};
-
-const TabPanel = ({ children, value, index }: TabPanelProps) => {
-    return (
-        <AnimatePresence mode="popLayout">
-            {value === index && (
-                <motion.div
-                    key={index}
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
-                    style={{ width: "100%", overflow: "hidden" }}
-                >
-                    <Paper
-                        elevation={3}
-                        sx={{
-                            p: 3,
-                            width: "100%",
-                            height: "100%",
-                            borderRadius: "12px",
-                        }}
-                    >
-                        {children},
-                    </Paper>
-                </motion.div>
-            )}
-        </AnimatePresence>
-    );
-};
