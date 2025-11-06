@@ -1,13 +1,6 @@
 import { useParams } from "react-router";
 import { useProfile } from "@lib/hooks/useProfile";
-import {
-    Box,
-    Button,
-    Divider,
-    ImageList,
-    ImageListItem,
-    Typography,
-} from "@mui/material";
+import { Box, Button, Divider, Typography } from "@mui/material";
 import { useState } from "react";
 import PhotoUploadWidget from "@shared/components/PhotoUploadWidget";
 import StarButton from "@shared/components/StarButton.tsx";
@@ -61,13 +54,29 @@ export default function ProfilePhotos() {
                         {photos.length === 0 ? (
                             <Typography>No photos added yet.</Typography>
                         ) : (
-                            <ImageList
-                                sx={{ height: 450 }}
-                                cols={6}
-                                rowHeight={164}
+                            <Box
+                                sx={{
+                                    display: "grid",
+                                    gridTemplateColumns:
+                                        "repeat(auto-fit, minmax(164px, 1fr))",
+                                    gap: 2,
+                                    justifyItems: {
+                                        xs: "center",
+                                        sm: "start",
+                                    },
+                                    maxHeight: 450,
+                                    overflow: "auto",
+                                }}
                             >
                                 {photos.map((item) => (
-                                    <ImageListItem key={item.id}>
+                                    <Box
+                                        key={item.id}
+                                        sx={{
+                                            position: "relative",
+                                            width: 164,
+                                            height: 164,
+                                        }}
+                                    >
                                         <img
                                             srcSet={`${item.url.replace(
                                                 "upload",
@@ -79,6 +88,8 @@ export default function ProfilePhotos() {
                                             )}`}
                                             alt="user profile image"
                                             loading="lazy"
+                                            width={164}
+                                            height={164}
                                         />
                                         {isCurrentUser && (
                                             <div>
@@ -126,9 +137,9 @@ export default function ProfilePhotos() {
                                                 )}
                                             </div>
                                         )}
-                                    </ImageListItem>
+                                    </Box>
                                 ))}
-                            </ImageList>
+                            </Box>
                         )}
                     </>
                 )}
