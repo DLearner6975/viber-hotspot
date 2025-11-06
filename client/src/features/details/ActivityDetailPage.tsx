@@ -16,13 +16,19 @@ export default function ActivityDetailPage() {
     if (!activity) return <Typography>Activity not found</Typography>;
 
     return (
-        <Grid container spacing={2}>
-            <Grid size={8}>
+        <Grid
+            container
+            spacing={2}
+            sx={{
+                flexDirection: { xs: "column-reverse", md: "row" },
+            }}
+        >
+            <Grid size={{ xs: 12, md: 8 }}>
                 <ActivityDetailsHeader activity={activity} />
                 <ActivityDetailsInfo activity={activity} />
                 <ActivityDetailsChat />
             </Grid>
-            <Grid size={4}>
+            <Grid size={{ xs: 12, md: 4 }}>
                 <ActivityDetailsSidebar activity={activity} />
             </Grid>
         </Grid>
