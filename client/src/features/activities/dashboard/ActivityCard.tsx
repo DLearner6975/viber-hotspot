@@ -28,8 +28,9 @@ export default function ActivityCard({ activity }: Props) {
         <Card elevation={3} sx={{ borderRadius: 3 }}>
             <Box
                 display="flex"
-                alignItems="center"
+                alignItems={{ xs: "flex-start", sm: "center" }}
                 justifyContent="space-between"
+                flexDirection={{ xs: "column", sm: "row" }}
             >
                 <CardHeader
                     avatar={
@@ -58,7 +59,13 @@ export default function ActivityCard({ activity }: Props) {
                         </>
                     }
                 />
-                <Box display="flex" flexDirection="column" gap={2} mr={2}>
+                <Box
+                    display="flex"
+                    flexDirection="column"
+                    gap={2}
+                    width={{ xs: "100%", sm: "auto" }}
+                    mr={{ xs: 0, sm: 2 }}
+                >
                     {(isHost || isGoing) && (
                         <Chip
                             label={label}
@@ -78,16 +85,26 @@ export default function ActivityCard({ activity }: Props) {
             </Box>
             <Divider sx={{ mb: 3 }} />
             <CardContent sx={{ p: 0 }}>
-                <Box display="flex" alignItems="center" mb={2} px={2}>
-                    <Box display="flex" flexGrow={0} alignItems="center">
+                <Box
+                    display="flex"
+                    alignItems={{ xs: "flex-start", sm: "center" }}
+                    mb={2}
+                    px={2}
+                    gap={{ xs: 2, sm: 0 }}
+                    flexDirection={{ xs: "column", sm: "row" }}
+                >
+                    <Box display="flex" flexGrow={0}>
                         <AccessTime sx={{ mr: 1 }} />
                         <Typography variant="body2" noWrap>
                             {formatDate(activity.date)}
                         </Typography>
                     </Box>
-
-                    <Place sx={{ ml: 3, mr: 1 }} />
-                    <Typography variant="body2">{activity.venue}</Typography>
+                    <Box display="flex" flexGrow={0} alignItems="center">
+                        <Place sx={{ ml: { xs: 0, sm: 3 }, mr: 1 }} />
+                        <Typography variant="body2">
+                            {activity.venue}
+                        </Typography>
+                    </Box>
                 </Box>
                 <Divider />
                 <Box
@@ -113,8 +130,9 @@ export default function ActivityCard({ activity }: Props) {
                     variant="contained"
                     sx={{
                         display: "flex",
-                        justifySelf: "self-end",
+                        justifySelf: { xs: "center", sm: "self-end" },
                         borderRadius: 3,
+                        mt: { xs: 2, sm: 0 },
                     }}
                 >
                     View
