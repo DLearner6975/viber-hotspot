@@ -86,10 +86,18 @@ export const useActivities = (id?: string) => {
     });
 
     const updateActivity = useMutation({
-        mutationFn: async (activity: Activity) =>
-            await agent.put<void>(`/activities`, activity),
-        onSuccess: async () => {
+        mutationFn: async (activity: Partial<Activity> & { id: string }) => {
+            const { id, ...activityData } = activity;
+            return await agent.put<void>(`/activities/${id}`, activityData);
+        },
+        onSuccess: async (_, variables) => {
             await queryClient.invalidateQueries({ queryKey: ["activities"] });
+            await queryClient.invalidateQueries({
+                queryKey: ["activities", variables.id],
+            });
+        },
+        onError: (error) => {
+            console.error("Failed to update activity:", error);
         },
     });
 

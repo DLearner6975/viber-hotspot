@@ -2,7 +2,7 @@ import { Box, Button } from "@mui/material";
 import { useActivities } from "@lib/hooks/useActivities";
 import { useNavigate, useParams } from "react-router";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import type { ActivitySchema } from "@lib/schemas/activitySchemas";
 import { activitySchema } from "@lib/schemas/activitySchemas";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -15,19 +15,40 @@ import SectionCard from "@shared/components/SectionCard";
 import LoadingSpinner from "@shared/components/LoadingSpinner";
 
 export default function ActivityForm() {
-    const { reset, handleSubmit, control } = useForm<ActivitySchema>({
-        mode: "onTouched",
-        resolver: zodResolver(activitySchema),
-    });
     const { id } = useParams();
     const navigate = useNavigate();
     const { updateActivity, createActivity, activity, isLoadingActivity } =
         useActivities(id);
 
+    const defaultValues = useMemo<Partial<ActivitySchema>>(() => {
+        if (!activity) return {};
+        return {
+            title: activity.title,
+            description: activity.description,
+            category: activity.category,
+            date: new Date(activity.date),
+            location: {
+                city: activity.city,
+                venue: activity.venue,
+                latitude: activity.latitude,
+                longitude: activity.longitude,
+            },
+        };
+    }, [activity]);
+
+    const { reset, handleSubmit, control } = useForm<ActivitySchema>({
+        mode: "onTouched",
+        resolver: zodResolver(activitySchema),
+        defaultValues,
+    });
+
     useEffect(() => {
-        if (activity)
+        if (activity) {
             reset({
-                ...activity,
+                title: activity.title,
+                description: activity.description,
+                category: activity.category,
+                date: new Date(activity.date),
                 location: {
                     city: activity.city,
                     venue: activity.venue,
@@ -35,17 +56,20 @@ export default function ActivityForm() {
                     longitude: activity.longitude,
                 },
             });
+        }
     }, [activity, reset]);
 
     const onSubmit = async (data: ActivitySchema) => {
         const { location, ...rest } = data;
         const flattenedData = { ...rest, ...location };
         try {
-            if (activity) {
-                const updateData = { ...activity, ...flattenedData };
-                await updateActivity.mutateAsync(updateData, {
-                    onSuccess: () => navigate(`/activities/${activity.id}`),
-                });
+            if (activity && id) {
+                await updateActivity.mutateAsync(
+                    { id, ...flattenedData },
+                    {
+                        onSuccess: () => navigate(`/activities/${id}`),
+                    }
+                );
             } else {
                 createActivity.mutate(flattenedData, {
                     onSuccess: (id) => navigate(`/activities/${id}`),
@@ -57,7 +81,9 @@ export default function ActivityForm() {
     };
 
     if (isLoadingActivity) return <LoadingSpinner size={50} />;
-    const isSubmitting = updateActivity.isPending || createActivity.isPending;
+    const isSubmitting = activity
+        ? updateActivity.isPending
+        : createActivity.isPending;
     return (
         <SectionCard
             title={activity ? "Edit Activity" : "Create Activity"}
