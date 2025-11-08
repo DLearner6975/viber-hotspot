@@ -38,6 +38,7 @@ export default function ProfileFollowings({ activeTab }: Props) {
                     justifyContent="center"
                     overflow="auto"
                     maxHeight="600px"
+                    pb={1}
                 >
                     {followings?.map((profile) => (
                         <Box
