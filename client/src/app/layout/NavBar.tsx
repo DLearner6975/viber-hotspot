@@ -93,27 +93,28 @@ export default function NavBar() {
                                 </Observer>
                             </MenuItem>
                         </Box>
-                        <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                            <MenuItemLink to="/activities" icon={<EventIcon />}>
-                                Activities
-                            </MenuItemLink>
-                            {currentUser && (
-                                <>
-                                    <MenuItemLink
-                                        to="/createActivity"
-                                        icon={<AddIcon />}
-                                    >
-                                        Create Activity
-                                    </MenuItemLink>
-                                    <MenuItemLink
-                                        to={`/profiles/${currentUser.id}`}
-                                        icon={<PersonIcon />}
-                                    >
-                                        My Profile
-                                    </MenuItemLink>
-                                </>
-                            )}
-                        </Box>
+                        {currentUser && (
+                            <Box sx={{ display: { xs: "none", md: "flex" } }}>
+                                <MenuItemLink
+                                    to="/activities"
+                                    icon={<EventIcon />}
+                                >
+                                    Activities
+                                </MenuItemLink>
+                                <MenuItemLink
+                                    to="/createActivity"
+                                    icon={<AddIcon />}
+                                >
+                                    Create Activity
+                                </MenuItemLink>
+                                <MenuItemLink
+                                    to={`/profiles/${currentUser.id}`}
+                                    icon={<PersonIcon />}
+                                >
+                                    My Profile
+                                </MenuItemLink>
+                            </Box>
+                        )}
                         <Box
                             display="flex"
                             alignItems="center"
@@ -174,19 +175,19 @@ export default function NavBar() {
                             <ListItemText primary={currentUser.displayName} />
                         </MenuItem>
                     )}
-                    {currentUser && <Divider />}
-                    <MenuItem
-                        component={NavLink}
-                        to="/activities"
-                        onClick={handleCloseMobileMenu}
-                    >
-                        <ListItemIcon>
-                            <EventIcon />
-                        </ListItemIcon>
-                        <ListItemText>Activities</ListItemText>
-                    </MenuItem>
                     {currentUser && (
                         <>
+                            <Divider />
+                            <MenuItem
+                                component={NavLink}
+                                to="/activities"
+                                onClick={handleCloseMobileMenu}
+                            >
+                                <ListItemIcon>
+                                    <EventIcon />
+                                </ListItemIcon>
+                                <ListItemText>Activities</ListItemText>
+                            </MenuItem>
                             <MenuItem
                                 component={NavLink}
                                 to="/createActivity"

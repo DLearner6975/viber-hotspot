@@ -28,7 +28,8 @@ const queryClient = new QueryClient({
 
 // Set up React Query persistence using sessionStorage
 persistQueryClient({
-    queryClient,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    queryClient: queryClient as any,
     persister: {
         persistClient: async (client) => {
             try {
