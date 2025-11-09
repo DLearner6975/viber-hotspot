@@ -1,4 +1,3 @@
-//TODO: rework some navbar code to reduce duplication between mobile and desktop menus
 import {
     Box,
     AppBar,
@@ -15,6 +14,12 @@ import {
 } from "@mui/material";
 
 import MenuIcon from "@mui/icons-material/Menu";
+import EventIcon from "@mui/icons-material/Event";
+import AddIcon from "@mui/icons-material/Add";
+import PersonIcon from "@mui/icons-material/Person";
+import LoginIcon from "@mui/icons-material/Login";
+import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useTheme } from "@mui/material/styles";
 import { NavLink } from "react-router";
 import MenuItemLink from "@shared/components/MenuItemLink";
@@ -59,7 +64,7 @@ export default function NavBar() {
                         `linear-gradient(135deg, ${theme.palette.primary.dark} 0%, ${theme.palette.primary.main} 69%, ${theme.palette.primary.main} 89%)`,
                 }}
             >
-                <Container maxWidth="xl">
+                <Container maxWidth={false}>
                     <Toolbar
                         disableGutters
                         sx={{
@@ -89,11 +94,25 @@ export default function NavBar() {
                             </MenuItem>
                         </Box>
                         <Box sx={{ display: { xs: "none", md: "flex" } }}>
-                            <MenuItemLink to="/activities">
+                            <MenuItemLink to="/activities" icon={<EventIcon />}>
                                 Activities
                             </MenuItemLink>
-                            <MenuItemLink to="/counter">Counter</MenuItemLink>
-                            <MenuItemLink to="/errors">Errors</MenuItemLink>
+                            {currentUser && (
+                                <>
+                                    <MenuItemLink
+                                        to="/createActivity"
+                                        icon={<AddIcon />}
+                                    >
+                                        Create Activity
+                                    </MenuItemLink>
+                                    <MenuItemLink
+                                        to={`/profiles/${currentUser.id}`}
+                                        icon={<PersonIcon />}
+                                    >
+                                        My Profile
+                                    </MenuItemLink>
+                                </>
+                            )}
                         </Box>
                         <Box
                             display="flex"
@@ -104,10 +123,16 @@ export default function NavBar() {
                                 <UserMenu />
                             ) : (
                                 <>
-                                    <MenuItemLink to="/login">
+                                    <MenuItemLink
+                                        to="/login"
+                                        icon={<LoginIcon />}
+                                    >
                                         Login
                                     </MenuItemLink>
-                                    <MenuItemLink to="/register">
+                                    <MenuItemLink
+                                        to="/register"
+                                        icon={<PersonAddIcon />}
+                                    >
                                         Register
                                     </MenuItemLink>
                                 </>
@@ -134,8 +159,11 @@ export default function NavBar() {
                 >
                     {currentUser && (
                         <MenuItem
-                            disabled
-                            sx={{ opacity: 1, cursor: "default" }}
+                            sx={{
+                                display: "flex",
+                                alignItems: "center",
+                                gap: 0.5,
+                            }}
                         >
                             <ListItemIcon>
                                 <Avatar
@@ -152,30 +180,21 @@ export default function NavBar() {
                         to="/activities"
                         onClick={handleCloseMobileMenu}
                     >
+                        <ListItemIcon>
+                            <EventIcon />
+                        </ListItemIcon>
                         <ListItemText>Activities</ListItemText>
                     </MenuItem>
-                    <MenuItem
-                        component={NavLink}
-                        to="/counter"
-                        onClick={handleCloseMobileMenu}
-                    >
-                        <ListItemText>Counter</ListItemText>
-                    </MenuItem>
-                    <MenuItem
-                        component={NavLink}
-                        to="/errors"
-                        onClick={handleCloseMobileMenu}
-                    >
-                        <ListItemText>Errors</ListItemText>
-                    </MenuItem>
-                    <Divider />
-                    {currentUser ? (
+                    {currentUser && (
                         <>
                             <MenuItem
                                 component={NavLink}
                                 to="/createActivity"
                                 onClick={handleCloseMobileMenu}
                             >
+                                <ListItemIcon>
+                                    <AddIcon />
+                                </ListItemIcon>
                                 <ListItemText>Create Activity</ListItemText>
                             </MenuItem>
                             <MenuItem
@@ -183,17 +202,26 @@ export default function NavBar() {
                                 to={`/profiles/${currentUser.id}`}
                                 onClick={handleCloseMobileMenu}
                             >
+                                <ListItemIcon>
+                                    <PersonIcon />
+                                </ListItemIcon>
                                 <ListItemText>My Profile</ListItemText>
                             </MenuItem>
-                            <MenuItem
-                                onClick={() => {
-                                    logoutUser.mutate();
-                                    handleCloseMobileMenu();
-                                }}
-                            >
-                                <ListItemText>Logout</ListItemText>
-                            </MenuItem>
                         </>
+                    )}
+                    <Divider />
+                    {currentUser ? (
+                        <MenuItem
+                            onClick={() => {
+                                logoutUser.mutate();
+                                handleCloseMobileMenu();
+                            }}
+                        >
+                            <ListItemIcon>
+                                <LogoutIcon />
+                            </ListItemIcon>
+                            <ListItemText>Logout</ListItemText>
+                        </MenuItem>
                     ) : (
                         <>
                             <MenuItem
@@ -201,6 +229,9 @@ export default function NavBar() {
                                 to="/login"
                                 onClick={handleCloseMobileMenu}
                             >
+                                <ListItemIcon>
+                                    <LoginIcon />
+                                </ListItemIcon>
                                 <ListItemText>Login</ListItemText>
                             </MenuItem>
                             <MenuItem
@@ -208,6 +239,9 @@ export default function NavBar() {
                                 to="/register"
                                 onClick={handleCloseMobileMenu}
                             >
+                                <ListItemIcon>
+                                    <PersonAddIcon />
+                                </ListItemIcon>
                                 <ListItemText>Register</ListItemText>
                             </MenuItem>
                         </>

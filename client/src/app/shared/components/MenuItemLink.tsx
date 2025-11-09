@@ -5,9 +5,11 @@ import { NavLink } from "react-router";
 export default function MenuItemLink({
     children,
     to,
+    icon,
 }: {
     children: ReactNode;
     to: string;
+    icon?: React.ReactElement;
 }) {
     return (
         <MenuItem
@@ -18,8 +20,12 @@ export default function MenuItemLink({
                 textTransform: "uppercase",
                 fontWeight: "bold",
                 "&.active": { color: "secondary.main" },
+                display: "flex",
+                alignItems: "center",
+                gap: 0.5,
             }}
         >
+            {icon}
             {children}
         </MenuItem>
     );
