@@ -115,4 +115,4 @@ The frontend starts at `https://localhost:3000`.
 
 ## License
 
-MIT
+MIT - the license king
