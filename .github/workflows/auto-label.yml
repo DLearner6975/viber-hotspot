@@ -56,6 +56,15 @@ jobs:
               labels.push('database');
             }
             
+            // Check for priority keywords
+            if (title.includes('critical') || body.includes('critical') || 
+                body.includes('blocking') || body.includes('urgent')) {
+              labels.push('priority/critical');
+            } else if (title.includes('high priority') || body.includes('high priority') ||
+                       body.includes('important')) {
+              labels.push('priority/high');
+            }
+            
             if (labels.length > 0) {
               await github.rest.issues.addLabels({
                 owner: context.repo.owner,
