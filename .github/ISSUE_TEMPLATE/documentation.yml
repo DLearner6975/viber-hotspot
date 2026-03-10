@@ -1,0 +1,42 @@
+name: Documentation
+description: Report missing or incorrect documentation
+title: "[DOCS]: "
+labels: ["documentation"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Help us improve our documentation!
+  
+  - type: dropdown
+    id: type
+    attributes:
+      label: Documentation Type
+      options:
+        - Missing Documentation
+        - Incorrect Documentation
+        - Unclear Documentation
+        - Documentation Improvement
+    validations:
+      required: true
+  
+  - type: input
+    id: location
+    attributes:
+      label: Location
+      description: Where is the documentation (or where should it be)?
+      placeholder: README.md, API/README.md, etc.
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What needs to be documented or corrected?
+    validations:
+      required: true
+  
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested Content
+      description: If you have suggested content or corrections, add them here

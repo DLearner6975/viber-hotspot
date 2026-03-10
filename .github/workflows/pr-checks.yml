@@ -1,0 +1,80 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  dotnet-build:
+    name: Build .NET Application
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.x'
+      
+      - name: Restore dependencies
+        run: dotnet restore
+      
+      - name: Build
+        run: dotnet build --no-restore --configuration Release
+      
+      - name: Run tests
+        run: dotnet test --no-build --configuration Release --verbosity normal
+
+  frontend-checks:
+    name: Frontend Checks
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          cache: 'npm'
+          cache-dependency-path: client/package-lock.json
+      
+      - name: Install dependencies
+        working-directory: ./client
+        run: npm ci
+      
+      - name: Lint
+        working-directory: ./client
+        run: npm run lint --if-present
+      
+      - name: Build
+        working-directory: ./client
+        run: npm run build
+      
+      - name: Run tests
+        working-directory: ./client
+        run: npm test --if-present
+
+  pr-title-check:
+    name: Check PR Title
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          types: |
+            feat
+            fix
+            docs
+            style
+            refactor
+            perf
+            test
+            build
+            ci
+            chore

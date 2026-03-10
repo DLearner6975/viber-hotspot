@@ -1,0 +1,146 @@
+name: Auto Label Issues and PRs
+
+on:
+  issues:
+    types: [opened, edited]
+  pull_request:
+    types: [opened, edited, synchronize]
+
+jobs:
+  label-issues:
+    name: Label Issues
+    runs-on: ubuntu-latest
+    if: github.event_name == 'issues'
+    
+    permissions:
+      issues: write
+    
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const title = issue.title.toLowerCase();
+            const body = issue.body ? issue.body.toLowerCase() : '';
+            
+            const labels = [];
+            
+            // Check for bug-related keywords
+            if (title.includes('bug') || title.includes('error') || title.includes('issue') || 
+                body.includes('bug') || body.includes('error')) {
+              labels.push('bug');
+            }
+            
+            // Check for feature-related keywords
+            if (title.includes('feature') || title.includes('enhancement') || 
+                body.includes('feature') || body.includes('enhancement')) {
+              labels.push('enhancement');
+            }
+            
+            // Check for documentation keywords
+            if (title.includes('docs') || title.includes('documentation') || 
+                body.includes('documentation')) {
+              labels.push('documentation');
+            }
+            
+            // Check for specific areas
+            if (body.includes('frontend') || body.includes('react') || body.includes('ui')) {
+              labels.push('frontend');
+            }
+            
+            if (body.includes('backend') || body.includes('api') || body.includes('server')) {
+              labels.push('backend');
+            }
+            
+            if (body.includes('database') || body.includes('sql')) {
+              labels.push('database');
+            }
+            
+            if (labels.length > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: labels
+              });
+            }
+
+  label-prs:
+    name: Label Pull Requests
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    
+    permissions:
+      pull-requests: write
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Label based on changed files
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            
+            // Get list of changed files
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number
+            });
+            
+            const labels = new Set();
+            
+            files.forEach(file => {
+              const path = file.filename;
+              
+              if (path.startsWith('client/')) {
+                labels.add('frontend');
+              }
+              
+              if (path.startsWith('API/') || path.startsWith('Application/') || 
+                  path.startsWith('Infrastructure/') || path.startsWith('Persistence/')) {
+                labels.add('backend');
+              }
+              
+              if (path.startsWith('Domain/')) {
+                labels.add('domain');
+              }
+              
+              if (path.includes('Migration') || path === 'Persistence/AppDbContext.cs') {
+                labels.add('database');
+              }
+              
+              if (path.endsWith('.md') || path.startsWith('.github/')) {
+                labels.add('documentation');
+              }
+              
+              if (path.includes('test') || path.includes('Test')) {
+                labels.add('tests');
+              }
+            });
+            
+            // Add size label
+            const changedLines = files.reduce((sum, file) => 
+              sum + file.additions + file.deletions, 0);
+            
+            if (changedLines < 50) {
+              labels.add('size/S');
+            } else if (changedLines < 200) {
+              labels.add('size/M');
+            } else if (changedLines < 500) {
+              labels.add('size/L');
+            } else {
+              labels.add('size/XL');
+            }
+            
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: pr.number,
+                labels: Array.from(labels)
+              });
+            }
