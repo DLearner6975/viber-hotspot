@@ -24,9 +24,9 @@ export default function LoginForm() {
     const {
         control,
         handleSubmit,
-        formState: { isValid, isSubmitting },
+        formState: { isSubmitting },
     } = useForm<LoginSchema>({
-        mode: "onTouched",
+        mode: "onBlur",
         resolver: zodResolver(loginSchema),
     });
 
@@ -39,7 +39,7 @@ export default function LoginForm() {
     };
     const handleClickShowPassword = () => setShowPassword((prev) => !prev);
     const handleMouseDownPassword = (
-        event: React.MouseEvent<HTMLButtonElement>
+        event: React.MouseEvent<HTMLButtonElement>,
     ) => {
         event.preventDefault();
     };
@@ -58,12 +58,18 @@ export default function LoginForm() {
                     borderRadius: 3,
                 }}
             >
-                <TextInput label="Email" control={control} name="email" />
+                <TextInput
+                    label="Email"
+                    control={control}
+                    name="email"
+                    autoComplete="email"
+                />
                 <TextInput
                     label="Password"
                     control={control}
                     type={showPassword ? "text" : "password"}
                     name="password"
+                    autoComplete="current-password"
                     slotProps={{
                         input: {
                             endAdornment: (
@@ -92,7 +98,7 @@ export default function LoginForm() {
                     variant="contained"
                     size="large"
                     color="primary"
-                    disabled={!isValid || isSubmitting}
+                    disabled={isSubmitting}
                 >
                     Login
                 </Button>

@@ -18,6 +18,7 @@ import {
 import { useState } from "react";
 import { VisibilityOff, Visibility } from "@mui/icons-material";
 import LoginCard from "@shared/components/LoginCard";
+import { toast } from "react-toastify";
 
 export default function RegisterForm() {
     const { registerUser } = useAccount();
@@ -28,12 +29,12 @@ export default function RegisterForm() {
         setError,
         formState: { isValid, isSubmitting },
     } = useForm<RegisterSchema>({
-        mode: "onTouched",
+        mode: "onBlur",
         resolver: zodResolver(registerSchema),
     });
     const handleClickShowPassword = () => setShowPassword((prev) => !prev);
     const handleMouseDownPassword = (
-        event: React.MouseEvent<HTMLButtonElement>
+        event: React.MouseEvent<HTMLButtonElement>,
     ) => {
         event.preventDefault();
     };
@@ -50,6 +51,7 @@ export default function RegisterForm() {
                             setError("password", {
                                 message: err,
                             });
+                        else toast.error(err);
                     });
                 }
             },
@@ -71,17 +73,24 @@ export default function RegisterForm() {
                     borderRadius: 3,
                 }}
             >
-                <TextInput label="Email" control={control} name="email" />
+                <TextInput
+                    label="Email"
+                    control={control}
+                    name="email"
+                    autoComplete="email"
+                />
                 <TextInput
                     label="Display Name"
                     control={control}
                     name="displayName"
+                    autoComplete="nickname"
                 />
                 <TextInput
                     label="Password"
                     control={control}
                     type={showPassword ? "text" : "password"}
                     name="password"
+                    autoComplete="new-password"
                     slotProps={{
                         input: {
                             endAdornment: (

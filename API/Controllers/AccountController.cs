@@ -1,4 +1,3 @@
-using System;
 using API.DTOs;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
@@ -24,7 +23,17 @@ public class AccountController(SignInManager<User> signInManager) : BaseApiContr
 
         if (result.Succeeded) return Ok();
 
-        foreach (var error in result.Errors) ModelState.AddModelError(error.Code, error.Description);
+        foreach (var error in result.Errors)
+        {
+            if (error.Code.Contains("Password", StringComparison.OrdinalIgnoreCase))
+            {
+                ModelState.AddModelError("Password", error.Description);
+                continue;
+            }
+
+            if (!ModelState.ContainsKey("Registration"))
+                ModelState.AddModelError("Registration", "Unable to complete registration with the provided credentials.");
+        }
 
         return ValidationProblem(ModelState);
     }
